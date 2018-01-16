@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介：开发过程中，调试是每个开发者的必备技能。本系列文章主要是围绕苹果公司的LLDB（Lower Level DeBugger 底层调试器）展开介绍。">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调试篇-LLDB简介 - iOS开发">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/调试篇-1/index.html">
+<meta property="og:site_name" content="Hanson">
+<meta property="og:description" content="简介：开发过程中，调试是每个开发者的必备技能。本系列文章主要是围绕苹果公司的LLDB（Lower Level DeBugger 底层调试器）展开介绍。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/sAkd0MR.kvU7YM*69*24C8vHHxuqzsewQeWM9fLzCAM!/r/dPIAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/ZY8M5igLV7H1mZ6wuQhXHY1eugg9823wNc3gMwXml0A!/r/dPMAAAAAAAAA">
+<meta property="og:updated_time" content="2018-01-16T07:27:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="调试篇-LLDB简介 - iOS开发">
+<meta name="twitter:description" content="简介：开发过程中，调试是每个开发者的必备技能。本系列文章主要是围绕苹果公司的LLDB（Lower Level DeBugger 底层调试器）展开介绍。">
+<meta name="twitter:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/sAkd0MR.kvU7YM*69*24C8vHHxuqzsewQeWM9fLzCAM!/r/dPIAAAAAAAAA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/12/调试篇-1/"/>
+
+
+
+
+
+  <title>调试篇-LLDB简介 - iOS开发 | Hanson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/调试篇-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">调试篇-LLDB简介 - iOS开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T11:04:39+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/sAkd0MR.kvU7YM*69*24C8vHHxuqzsewQeWM9fLzCAM!/r/dPIAAAAAAAAA" alt="logo"></p>
+<p>   简介：开发过程中，调试是每个开发者的必备技能。本系列文章主要是围绕苹果公司的LLDB（Lower Level DeBugger 底层调试器）展开介绍。<br><a id="more"></a></p>
+<h2 id="Lower-Level-DeBugger-底层调试器"><a href="#Lower-Level-DeBugger-底层调试器" class="headerlink" title="Lower Level DeBugger 底层调试器"></a>Lower Level DeBugger 底层调试器</h2><p>LLDB是在LLVM可重用组件构建的下一代高性能调试器，相对于老版本的GDB，LLDB进行了很大的修改升级。其中包括了完整的LLVM编译器。而其中的Clang表达式解析器和反汇编程序就可以使得开发人员可以在控制台直接进行“代码输出“。<br>比如 在打断点以后，在控制器可以进行如下操作：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(lldb) po <span class="keyword">self</span>.view.frame</span><br><span class="line">(origin = (x = <span class="number">0</span>, y = <span class="number">0</span>), size = (width = <span class="number">375</span>, height = <span class="number">667</span>))</span><br><span class="line"></span><br><span class="line">(lldb) print [<span class="keyword">self</span>.view.subviews count]</span><br><span class="line">(<span class="built_in">NSUInteger</span>) $<span class="number">1</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">(lldb) print $<span class="number">1</span> + <span class="number">9</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>) $<span class="number">2</span> = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">(lldb) print $<span class="number">2</span> + <span class="number">5</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>) $<span class="number">3</span> = <span class="number">14</span></span><br><span class="line">(lldb) </span><br></pre></td></tr></table></figure>
+<p>要进行在控制台“代码输出”，就要先了解LLDB语法。</p>
+<h2 id="LLDB语法"><a href="#LLDB语法" class="headerlink" title="LLDB语法"></a>LLDB语法</h2><p>在我们的开发过程中与LLDB通过代码交互主要是在调试区域部分输入相应的命令，在每次的输入命令的时候可以有几个命令一起，同时也可以有一个或者几个可选的参数，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;command&gt; [&lt;subcommand&gt; [&lt;subcommand&gt;...]] &lt;action&gt; [-options [option-value]] [argument [argument...]]</span><br></pre></td></tr></table></figure>
+<h3 id="语法说明："><a href="#语法说明：" class="headerlink" title="语法说明："></a><em>语法说明：</em></h3><blockquote>
+<p><strong> command </strong>：调试命令的名称。<br><strong> subcommand </strong> ：调试子命令的名称，与命令按照层级结构进行构建。一个命令对象为跟其的子命令创建一个上下文，子命令又为其子命令创建一个上下文。如此往复下去，构建整个“命令块”。<br><strong> action </strong> ：执行命令的操作。<br><strong> options </strong> ：option选项，命令选项，动作的修改者；一个命令中可能会有一个或者几个命令选项，可以使用<code>-</code>,<code>--</code>来组合修改执行的动作。<br><strong> arguement </strong> ：命令的参数，一个命令可以有一个或者几个参数，参数的动作执行的额分隔标识。<br><strong> []</strong> ：标识命令是可选的，可有可无。</p>
+</blockquote>
+<p><strong>上面这些元素都是通过空格来分割，如果元素本身含有空格，则可以使用双引用，如果元素中含有双引号，则可以使用反斜杠或者单引号。</strong></p>
+<p><strong>e.g.</strong><br>下面是部分断点(<code>breakpoint</code>)命令，括号中的是规范形式：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">breakpoint set</span><br><span class="line">   -M &lt;method&gt; ( --method &lt;method&gt; )</span><br><span class="line">   -S &lt;selector&gt; ( --selector &lt;selector&gt; )</span><br><span class="line">   -b &lt;function-name&gt; ( --basename &lt;function-name&gt; )</span><br><span class="line">   -f &lt;filename&gt; ( --file &lt;filename&gt; )</span><br><span class="line">   -l &lt;linenum&gt; ( --line &lt;linenum&gt; )</span><br><span class="line">   -n &lt;function-name&gt; ( --name &lt;function-name&gt; )</span><br></pre></td></tr></table></figure></p>
+<p>具体实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(lldb) breakpoint set --file ViewController.m --line 38</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong> command </strong>:  breakpoint 表示断点命令名字<br><strong> action </strong> :  set 表示设置断点<br><strong> options </strong> :  –file 表示根据方法文件位置设置断点（缩写前面用<code>-</code>，对应上面第5行代码中的<code>-f &lt;filename&gt; ( --file &lt;filename&gt; )</code>）<br><strong> arguement</strong> :  ViewController.m –line 38 表示文件具体断点位置（ViewController的.m文件第38行）</p>
+</blockquote>
+<p>设置成功之后，控制台会输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Breakpoint 2: where = DeBuggerDemo01`-[ViewController doSomethiing] + 35 at ViewController.m:38, address = 0x0000000100a7f683</span><br></pre></td></tr></table></figure></p>
+<p>这样当代码运行到ViewController的.m文件第38行便会暂停。</p>
+<h3 id="原始-raw-命令："><a href="#原始-raw-命令：" class="headerlink" title=" 原始(raw)命令： "></a><strong> <em>原始(raw)命令：</em> </strong></h3><p>原始(raw)命令会将命令后面的所有东西当做参数传递，LLDB支持不带命令选项（option）的原始命令，同时在LLDB中，部分原始命令也是可以带命令选项的（<code>options</code>）。当使用命令选项的时候，需要在命令选项后面加<code>--</code>区分命令选项以及参数。<br><strong>e.g.</strong><br>原始命令<code>expression</code>,分别介绍一下使用<code>--</code>和不使用<code>--</code>的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(lldb) expression -o self</span><br><span class="line">error: use of undeclared identifier &apos;o&apos;</span><br><span class="line">(lldb) expression -o -- self</span><br><span class="line">&lt;ViewController: 0x7f86f3f08d00&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="唯一匹配原则："><a href="#唯一匹配原则：" class="headerlink" title=" 唯一匹配原则： "></a><strong> <em>唯一匹配原则：</em> </strong></h3><p>如果根据前面n个字母已经可以唯一匹配到某个命令，则只写前n个字母等效于完整的命令，以下两种输出的效果是一样的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(lldb) exp -o -- test</span><br><span class="line">50</span><br><span class="line"></span><br><span class="line">(lldb) expression -o -- test</span><br><span class="line">50</span><br></pre></td></tr></table></figure></p>
+<h3 id="命令补全-COMMAND-COMPLETION-："><a href="#命令补全-COMMAND-COMPLETION-：" class="headerlink" title=" 命令补全(COMMAND COMPLETION)： "></a><strong> <em>命令补全(COMMAND COMPLETION)：</em> </strong></h3><p>当我们输入一个命令的时候，控制台会自动弹出完整命令，也可以按ESC键手动弹出。</p>
+<blockquote>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/ZY8M5igLV7H1mZ6wuQhXHY1eugg9823wNc3gMwXml0A!/r/dPMAAAAAAAAA" alt="logo"></p>
+</blockquote>
+<p>在控制台输入<code>help</code>命令便可以获取每一个命令的使用：<br><blockquote><footer><strong>代码引用</strong><cite><a href="https://juejin.im/entry/58c75b258ac24707201369c4" target="_blank" rel="noopener">使用 LLDB 调试 APP</a></cite></footer></blockquote></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">  apropos           -- 列出与单词或主题相关的调试器命令</span><br><span class="line">  breakpoint        -- 在断点上操作的命令 (详情使用&apos;help b&apos;查看)</span><br><span class="line">  bugreport         -- 用于创建指定域的错误报告</span><br><span class="line">  command           -- 用于管理自定义LLDB命令的命令</span><br><span class="line">  disassemble       -- 拆分当前目标中的特定说明。 默认为当前线程和堆栈帧的当前函数</span><br><span class="line">  expression        -- 求当前线程上的表达式的值。 以LLDB默认格式显示返回的值</span><br><span class="line">  frame             -- 用于选择和检查当前线程的堆栈帧的命令</span><br><span class="line">  gdb-remote        -- 通过远程GDB服务器连接到进程。 如果未指定主机，则假定为localhost</span><br><span class="line">  gui               -- 切换到基于curses的GUI模式</span><br><span class="line">  help              -- 显示所有调试器命令的列表，或提供指定命令的详细信息</span><br><span class="line">  kdp-remote        -- 通过远程KDP服务器连接到进程。 如果没有指定UDP端口，则假定端口41139</span><br><span class="line">  language          -- 指定源语言</span><br><span class="line">  log               -- 控制LLDB内部日志记录的命令</span><br><span class="line">  memory            -- 用于在当前目标进程的内存上操作的命令</span><br><span class="line">  platform          -- 用于管理和创建平台的命令</span><br><span class="line">  plugin            -- 用于管理LLDB插件的命令</span><br><span class="line">  process           -- 用于与当前平台上的进程交互的命令</span><br><span class="line">  quit              -- 退出LLDB调试器</span><br><span class="line">  register          -- 命令访问当前线程和堆栈帧的寄存器</span><br><span class="line">  script            -- 使用提供的代码调用脚本解释器并显示任何结果。 如果没有提供代码，启动交互式解释器。</span><br><span class="line">  settings          -- 用于管理LLDB设置的命令</span><br><span class="line">  source            -- 检查当前目标进程的调试信息所描述的源代码的命令</span><br><span class="line">  target            -- 用于在调试器目标上操作的命令</span><br><span class="line">  thread            -- 用于在当前进程中的一个或多个线程上操作的命令</span><br><span class="line">  type              -- 在类型系统上操作的命令</span><br><span class="line">  version           -- 显示LLDB调试器版本</span><br><span class="line">  watchpoint        -- 在观察点上操作的命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">缩写命令 (使用 &apos;help command alias&apos;查看更多信息):</span><br><span class="line"></span><br><span class="line">  add-dsym  -- (&apos;target symbols add&apos;)  通过指定调试符号文件的路径，或使用选项指定下载符号的模块，将调试符号文件添加到目标的当前模块中的一个</span><br><span class="line">  attach    -- (&apos;_regexp-attach&apos;)  通过ID或名称附加到进程</span><br><span class="line">  b         -- (&apos;_regexp-break&apos;)  使用几种简写格式之一设置断点</span><br><span class="line">  bt        -- (&apos;_regexp-bt&apos;)  显示当前线程的调用堆栈。通过数字参数设置最多显示帧数。参数“all”显示所有线程</span><br><span class="line">  c         -- (&apos;process continue&apos;)  继续执行当前进程中的所有线程</span><br><span class="line">  call      -- (&apos;expression --&apos;)  计算当前线程上的表达式,使用LLDB的默认格式显示返回的值</span><br><span class="line">  continue  -- (&apos;process continue&apos;)  继续执行当前进程中的所有线程</span><br><span class="line">  detach    -- (&apos;process detach&apos;)  脱离当前目标进程</span><br><span class="line">  di        -- (&apos;disassemble&apos;)  拆分当前目标中的特定说明。 默认为当前线程和堆栈帧的当前函数</span><br><span class="line">  dis       -- (&apos;disassemble&apos;)  同上</span><br><span class="line">  display   -- (&apos;_regexp-display&apos;)  在每次停止时计算表达式（请参阅&apos;help target stop-hook&apos;）</span><br><span class="line">  down      -- (&apos;_regexp-down&apos;)  选择一个新的堆栈帧。默认为移动一个帧，数字参数可以指定值</span><br><span class="line">  env       -- (&apos;_regexp-env&apos;)  查看和设置环境变量的简写</span><br><span class="line">  exit      -- (&apos;quit&apos;)  退出LLDB调试器</span><br><span class="line">  f         -- (&apos;frame select&apos;)  从当前线程中通过索引选择当前堆栈帧（参见&apos;thread backtrace&apos;）</span><br><span class="line">  file      -- (&apos;target create&apos;)  使用参数作为主要可执行文件创建目标</span><br><span class="line">  finish    -- (&apos;thread step-out&apos;)  完成当前堆栈帧的执行并返回后停止。 默认为当前线程</span><br><span class="line">  image     -- (&apos;target modules&apos;)  用于访问一个或多个目标模块的信息的命令</span><br><span class="line">  j         -- (&apos;_regexp-jump&apos;)  将程序计数器设置为新地址</span><br><span class="line">  jump      -- (&apos;_regexp-jump&apos;)  同上</span><br><span class="line">  kill      -- (&apos;process kill&apos;)  终止当前目标进程</span><br><span class="line">  l         -- (&apos;_regexp-list&apos;)  使用几种简写格式之一列出相关的源代码</span><br><span class="line">  list      -- (&apos;_regexp-list&apos;)  同上</span><br><span class="line">  n         -- (&apos;thread step-over&apos;)  源级单步执行、步进调用，默认当前线程</span><br><span class="line">  next      -- (&apos;thread step-over&apos;)  同上</span><br><span class="line">  nexti     -- (&apos;thread step-inst-over&apos;)  指令级单步执行、步进调用，默认当前线程</span><br><span class="line">  ni        -- (&apos;thread step-inst-over&apos;)  同上</span><br><span class="line">  p         -- (&apos;expression --&apos;)  计算当前线程上表达式的值，以LLDB默认格式显示返回值</span><br><span class="line">  parray    -- (&apos;expression -Z %1   --&apos;)  同上</span><br><span class="line">  po        -- 计算当前线程上的表达式。显示由类型作者控制的格式的返回值。</span><br><span class="line">  poarray   -- (&apos;expression -O -Z %1    --&apos;)  计算当前线程上表达式的值，以LLDB默认格式显示返回值</span><br><span class="line">  print     -- (&apos;expression --&apos;)  同上</span><br><span class="line">  q         -- (&apos;quit&apos;)  退出LLDB调试器</span><br><span class="line">  r         -- (&apos;process launch -X true --&apos;)  在调试器中启动可执行文件</span><br><span class="line">  rbreak    -- (&apos;breakpoint set -r %1&apos;)  在可执行文件中设置断点或断点集</span><br><span class="line">  repl      -- (&apos;expression -r  -- &apos;)  E计算当前线程上表达式的值，以LLDB默认格式显示返回值</span><br><span class="line">  run       -- (&apos;process launch -X true --&apos;)  在调试器中启动可执行文件</span><br><span class="line">  s         -- (&apos;thread step-in&apos;)  源级单步执行、步进调用，默认当前线程</span><br><span class="line">  si        -- (&apos;thread step-inst&apos;)  指令级单步执行、步进调用，默认当前线程</span><br><span class="line">  sif       -- 遍历当前块，如果直接步入名称与TargetFunctionName匹配的函数，则停止</span><br><span class="line">  step      -- (&apos;thread step-in&apos;)  源级单步执行、步进调用，默认当前线程</span><br><span class="line">  stepi     -- (&apos;thread step-inst&apos;)  指令级单步执行、步进调用，默认当前线程</span><br><span class="line">  t         -- (&apos;thread select&apos;)  更改当前选择的线程</span><br><span class="line">  tbreak    -- (&apos;_regexp-tbreak&apos;)  使用几种简写格式之一设置单次断点</span><br><span class="line">  undisplay -- (&apos;_regexp-undisplay&apos;)  每次停止时停止显示表达式（由stop-hook索引指定）</span><br><span class="line">  up        -- (&apos;_regexp-up&apos;)  选择较早的堆栈帧。 默认为移动一个帧，数值参数可以指定任意数字</span><br><span class="line">  x         -- (&apos;memory read&apos;)  从当前目标进程的内存中读取</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p> 这篇主要是介绍LLDB，入门篇。接下来还有几篇详细介绍更多的调试技巧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/26/iOS多任务-GCD篇/" rel="next" title="iOS多任务-GCD篇">
+                <i class="fa fa-chevron-left"></i> iOS多任务-GCD篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">luo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lower-Level-DeBugger-底层调试器"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Lower-Level-DeBugger-&#x5E95;&#x5C42;&#x8C03;&#x8BD5;&#x5668;" class="headerlink" title="Lower Level DeBugger &#x5E95;&#x5C42;&#x8C03;&#x8BD5;&#x5668;"></a>Lower Level DeBugger &#x5E95;&#x5C42;&#x8C03;&#x8BD5;&#x5668;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLDB语法"><span class="nav-number">2.</span> <span class="nav-text"><a href="#LLDB&#x8BED;&#x6CD5;" class="headerlink" title="LLDB&#x8BED;&#x6CD5;"></a>LLDB&#x8BED;&#x6CD5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法说明："><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x8BED;&#x6CD5;&#x8BF4;&#x660E;&#xFF1A;" class="headerlink" title="&#x8BED;&#x6CD5;&#x8BF4;&#x660E;&#xFF1A;"></a><em>&#x8BED;&#x6CD5;&#x8BF4;&#x660E;&#xFF1A;</em></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始-raw-命令："><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x539F;&#x59CB;-raw-&#x547D;&#x4EE4;&#xFF1A;" class="headerlink" title=" &#x539F;&#x59CB;(raw)&#x547D;&#x4EE4;&#xFF1A; "></a><strong> <em>&#x539F;&#x59CB;(raw)&#x547D;&#x4EE4;&#xFF1A;</em> </strong></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#唯一匹配原则："><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x552F;&#x4E00;&#x5339;&#x914D;&#x539F;&#x5219;&#xFF1A;" class="headerlink" title=" &#x552F;&#x4E00;&#x5339;&#x914D;&#x539F;&#x5219;&#xFF1A; "></a><strong> <em>&#x552F;&#x4E00;&#x5339;&#x914D;&#x539F;&#x5219;&#xFF1A;</em> </strong></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令补全-COMMAND-COMPLETION-："><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x547D;&#x4EE4;&#x8865;&#x5168;-COMMAND-COMPLETION-&#xFF1A;" class="headerlink" title=" &#x547D;&#x4EE4;&#x8865;&#x5168;(COMMAND COMPLETION)&#xFF1A; "></a><strong> <em>&#x547D;&#x4EE4;&#x8865;&#x5168;(COMMAND COMPLETION)&#xFF1A;</em> </strong></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
