@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,绘图," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介：大部分我们的UI控件以及视图都是基于UIKit创建，UIKit框架已经集合了绝大部分的UI展示，但是在一些特殊的需求下，仅仅使用UIKit已经无法满足我们的需求了。本篇将简单介绍Core Graphics。">
+<meta name="keywords" content="iOS,绘图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core Graphics">
+<meta property="og:url" content="http://yoursite.com/2018/02/08/Quartz-2D/index.html">
+<meta property="og:site_name" content="Hanson">
+<meta property="og:description" content="简介：大部分我们的UI控件以及视图都是基于UIKit创建，UIKit框架已经集合了绝大部分的UI展示，但是在一些特殊的需求下，仅仅使用UIKit已经无法满足我们的需求了。本篇将简单介绍Core Graphics。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/3F1z.7J7jD0V*ELM5KXR1.ZmEh.OPXIQ06.cLbY4VFE!/r/dHIAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/TgFNkZhskyhQ0xV5X.3usiBCNTK82cO3jTG9cOb3sUY!/r/dGgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/TFPi9F1B6OAgGboPFPv*2xyzoyayL2kMAPpkkF710KI!/r/dGcBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/2HgbRCGK.VhULhSP1sJFHt776djX4xL2x5ZLQhCRTtw!/r/dJIAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/Etg4T5rHRRdqFqnEAw.r2NZkA*TWWmSQRjGnuPoOGxo!/r/dFYBAAAAAAAA">
+<meta property="og:updated_time" content="2018-02-26T07:21:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Core Graphics">
+<meta name="twitter:description" content="简介：大部分我们的UI控件以及视图都是基于UIKit创建，UIKit框架已经集合了绝大部分的UI展示，但是在一些特殊的需求下，仅仅使用UIKit已经无法满足我们的需求了。本篇将简单介绍Core Graphics。">
+<meta name="twitter:image" content="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/3F1z.7J7jD0V*ELM5KXR1.ZmEh.OPXIQ06.cLbY4VFE!/r/dHIAAAAAAAAA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/08/Quartz-2D/"/>
+
+
+
+
+
+  <title>Core Graphics | Hanson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/Quartz-2D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Core Graphics</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T14:03:11+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/3F1z.7J7jD0V*ELM5KXR1.ZmEh.OPXIQ06.cLbY4VFE!/r/dHIAAAAAAAAA" alt="logo"></p>
+<p>简介：大部分我们的UI控件以及视图都是基于UIKit创建，UIKit框架已经集合了绝大部分的UI展示，但是在一些特殊的需求下，仅仅使用UIKit已经无法满足我们的需求了。本篇将简单介绍Core Graphics。</p>
+<a id="more"></a>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>当我们使用Core Graphics的时候，其中最主要是使用Quartz 2D的API，可以让我们在内存中直接绘制图像。在“绘制”过程中，我们可以形象比喻成一张画布。如果我们将整张画布涂成红色，再将整张画布涂成蓝色，如果蓝色透明度为1，那么现在这张画布为蓝色。如果蓝色透明度为0.5，那么现在这张画布为紫色。如果完全透明，就是红色。在我们使用Quartz 2D的过程也是类似相同的原理。</p>
+<h2 id="绘图方式"><a href="#绘图方式" class="headerlink" title="绘图方式"></a>绘图方式</h2><p>通常在使用Quartz绘制图形时，会在drawRect:方法中编写代码。当每次视图需要自身重新绘制时都会调用drawRect:</p>
+<h2 id="绘图环境（画布）"><a href="#绘图环境（画布）" class="headerlink" title="绘图环境（画布）"></a>绘图环境（画布）</h2><p>前面我们提到在使用Quartz的时候，有类似于绘图的原理。所以在我们开始用Quartz需要获取系统默认的“画布”，也可以自己创建一个自己的“画布”。当我们需要实现创建一个不想立即显示的内容，我们就可以自己创建一个“画布”。系统默认的环境（画布），如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CGContextRef context = UIGraphicsGetCurrentContext(); // C语言</span><br></pre></td></tr></table></figure>
+<p>我们简单的绘制一条红色的实线</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/TgFNkZhskyhQ0xV5X.3usiBCNTK82cO3jTG9cOb3sUY!/r/dGgBAAAAAAAA" alt="红色实线"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)drawRect:(CGRect)rect &#123;</span><br><span class="line">//    Drawing code</span><br><span class="line">    CGContextRef contextRef = UIGraphicsGetCurrentContext(); // 获取当前默认环境（画布）</span><br><span class="line">    CGContextMoveToPoint(contextRef, 10.0, 80.0); // “笔的起始点”</span><br><span class="line">    CGContextAddLineToPoint(contextRef, 80.0, 80.0); // “笔的结束点”</span><br><span class="line">    CGContextSetLineWidth(contextRef, 5.0); // “笔的宽度”</span><br><span class="line">    CGContextSetStrokeColorWithColor(contextRef, [UIColor redColor].CGColor); // “笔的填充模式，以及颜色”</span><br><span class="line">    CGContextStrokePath(contextRef); </span><br><span class="line">    CGContextClosePath(contextRef);// “绘制结束”</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我们绘制的过程中，CGContextStrokePath()未调用的时候，我们前面所做的操作是“看不见的”。当我们调用CGContextStrokePath()的时候相当于告知Quartz来绘制之前“配置”的图。<br>使用Quartz 2D一般由一下几步构成：</p>
+<ul>
+<li>获取图形上下文</li>
+<li>创建并设置路径</li>
+<li>将路径添加到上下文</li>
+<li>设置上下文相关状态</li>
+<li>绘制路径</li>
+<li>释放路径</li>
+</ul>
+<h2 id="一般图形的绘制"><a href="#一般图形的绘制" class="headerlink" title="一般图形的绘制"></a>一般图形的绘制</h2><p>当我们需要绘制一般的图形我们可以借助Quartz提供的函数进行绘制，比如虚线，矩形，椭圆，曲线等，我们先绘制一些简单的图案：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/TFPi9F1B6OAgGboPFPv*2xyzoyayL2kMAPpkkF710KI!/r/dGcBAAAAAAAA" alt="矩形图片"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">CGContextRef contextRef = UIGraphicsGetCurrentContext();</span><br><span class="line"></span><br><span class="line">//直线</span><br><span class="line">CGContextMoveToPoint(contextRef, 20, 80); // “笔的起始点”</span><br><span class="line">CGContextAddLineToPoint(contextRef, 100, 80); // “笔的结束点”</span><br><span class="line">CGContextSetLineWidth(contextRef, 5); // “笔的宽度”</span><br><span class="line">CGContextSetStrokeColorWithColor(contextRef, [UIColor redColor].CGColor); // “笔的填充模式，以及颜色”</span><br><span class="line">CGContextStrokePath(contextRef); // “绘制结束”</span><br><span class="line"></span><br><span class="line">[@&quot;直线&quot; drawInRect:CGRectMake(20, 80 + 20, 80, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">//折线</span><br><span class="line">CGContextSetLineCap(contextRef, kCGLineCapSquare);//线条样式</span><br><span class="line">CGContextSetLineWidth(contextRef, 5);//线条粗细宽度</span><br><span class="line">CGContextSetRGBStrokeColor(contextRef, 0, 1, 0, 1);//设置颜色</span><br><span class="line">CGContextBeginPath(contextRef);// “笔的起始点”</span><br><span class="line">CGContextMoveToPoint(contextRef, 20, 170);</span><br><span class="line">CGContextAddLineToPoint(contextRef, 30, 190);//下一个坐标点</span><br><span class="line">CGContextAddLineToPoint(contextRef, 40, 160);//下一个坐标点</span><br><span class="line">CGContextAddLineToPoint(contextRef, 60, 210);//下一个坐标点</span><br><span class="line">CGContextAddLineToPoint(contextRef, 100, 210);//下一个坐标点</span><br><span class="line">CGContextStrokePath(contextRef);//连接上面定义的坐标点</span><br><span class="line"></span><br><span class="line">[@&quot;折线&quot; drawInRect:CGRectMake(20, 210 + 20, 80, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">CGContextAddRect(contextRef, CGRectMake(20, 280, 60, 60));</span><br><span class="line">CGContextSetStrokeColorWithColor(contextRef, [UIColor brownColor].CGColor);</span><br><span class="line">CGContextStrokePath(contextRef);</span><br><span class="line"></span><br><span class="line">[@&quot;矩形&quot; drawInRect:CGRectMake(20, 340 + 20, 60, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">CGContextAddEllipseInRect(contextRef, CGRectMake(200, 60, 100, 100));</span><br><span class="line">CGContextSetFillColorWithColor(contextRef, [UIColor blueColor].CGColor);</span><br><span class="line">CGContextFillPath(contextRef);</span><br><span class="line"></span><br><span class="line">[@&quot;圆&quot; drawInRect:CGRectMake(200, 60 + 100 + 20, 100, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">CGContextAddEllipseInRect(contextRef, CGRectMake(200, 250, 100, 80));</span><br><span class="line">CGContextSetFillColorWithColor(contextRef, [UIColor blueColor].CGColor);</span><br><span class="line">CGContextFillPath(contextRef);</span><br><span class="line"></span><br><span class="line">[@&quot;椭圆&quot; drawInRect:CGRectMake(200, 250 + 80 + 20, 100, 20) withAttributes:self.attribute];</span><br></pre></td></tr></table></figure>
+<p>以上绘制比较容易理解，不做过多介绍，接下来绘制虚线：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/2HgbRCGK.VhULhSP1sJFHt776djX4xL2x5ZLQhCRTtw!/r/dJIAAAAAAAAA" alt="矩形图片"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//虚线</span><br><span class="line">CGContextSetStrokeColorWithColor(contextRef, [UIColor blackColor].CGColor);</span><br><span class="line">CGContextSetLineCap(contextRef, kCGLineCapButt);</span><br><span class="line">CGContextSetLineWidth(contextRef, 5);</span><br><span class="line">CGContextMoveToPoint(contextRef, 0, 450);</span><br><span class="line">CGContextAddLineToPoint(contextRef, kScreenWidth, 450);</span><br><span class="line">CGFloat array0[] = &#123;10,20,30,40&#125;;//设置虚线排列方式:下面的array0中的数字表示先绘制10个点空20个点再绘制30个点再空40个点，如此反复循环</span><br><span class="line">CGContextSetLineDash(contextRef, 0, array0, 4);//最后一个参数“4”代表排列的个数，取前面四个值(10,20,30,40)反复循环</span><br><span class="line">CGContextDrawPath(contextRef, kCGPathStroke);</span><br><span class="line"></span><br><span class="line">CGContextMoveToPoint(contextRef, 0, 470);</span><br><span class="line">CGContextAddLineToPoint(contextRef, kScreenWidth, 470);</span><br><span class="line">CGFloat array1[] = &#123;10,20,30,40&#125;;</span><br><span class="line">CGContextSetLineDash(contextRef, 0, array1, 1);//最后一个参数“1”代表排列的个数，取前面1个值(10)反复循环</span><br><span class="line">CGContextDrawPath(contextRef, kCGPathStroke);</span><br><span class="line"></span><br><span class="line">CGContextMoveToPoint(contextRef, 0, 490);</span><br><span class="line">CGContextAddLineToPoint(contextRef, kScreenWidth, 490);</span><br><span class="line">CGFloat array2[] = &#123;10,20,30,40&#125;;</span><br><span class="line">CGContextSetLineDash(contextRef, 10, array2, 1);//第二个参数表示第一次“循环”时跳过十个点</span><br><span class="line">CGContextDrawPath(contextRef, kCGPathStroke);</span><br><span class="line"></span><br><span class="line">[@&quot;虚线&quot; drawInRect:CGRectMake(0, 490 + 20, kScreenWidth, 20) withAttributes:self.attribute];</span><br></pre></td></tr></table></figure>
+<p>虚线的绘制主要是理解CGContextSetLineDash中的几个参数，首先我们要明白，虚线是由“绘制”和“留空”组合起来的线。那么在绘制过程中，主要是标记什么时候“绘制”，什么时候“留空”。在array0、array1、array2中的数字就是用来标记的。当CGContextSetLineDash最后一个参数为几就会取前几个数字进行标记。<br>比如当为1时就会取array0的10作为标记参数，在CGContextSetLineDash第二个参数为0时，整个标记规则为先“绘制”10点，再“留空”10点，再“绘制”10点，再“留空”10点，如此往复，直到绘制结束；在CGContextSetLineDash第二个参数为10(或者5)时，在第一轮绘制的时候会先“跳过”10(或者5)点的绘制，如果是5就先“绘制”五个点(10减去5)，如果是10就直接先“绘制”0个点(即直接先留空十个点)，往后的往复则按正常绘制，无需“跳过”，直到绘制结束。<br>当为3时就会去array0的(10,20,30)作为标记参数，后续规则跟之前的是一样的。</p>
+<p>弧线的绘制：<br><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/Etg4T5rHRRdqFqnEAw.r2NZkA*TWWmSQRjGnuPoOGxo!/r/dFYBAAAAAAAA" alt="矩形图片"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">//弧线</span><br><span class="line">CGContextSetLineDash(contextRef, 0, array2, 0);</span><br><span class="line">CGContextSetLineWidth(contextRef, 1);</span><br><span class="line">CGContextSetStrokeColorWithColor(contextRef, [UIColor redColor].CGColor);</span><br><span class="line">CGContextAddArc(contextRef, 420, 150, 30, 0, M_PI, 1);</span><br><span class="line">CGContextStrokePath(contextRef);</span><br><span class="line">/*</span><br><span class="line"> CGContextAddArc(contextRef, 420, 150, 30, 0, M_PI, 1)</span><br><span class="line"> 圆心：(420, 150) 半径：30 启始角度：0 结束角度：M_PI 旋转方向：1 顺时针 0 逆时针</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">CGContextMoveToPoint(contextRef,450,240);</span><br><span class="line">CGContextAddLineToPoint(contextRef,400,270);</span><br><span class="line">CGContextAddLineToPoint(contextRef,430,310);</span><br><span class="line"></span><br><span class="line">CGContextMoveToPoint(contextRef,450,240);//设置圆弧的起点</span><br><span class="line">CGContextAddArcToPoint(contextRef,400,270,430,310,40);</span><br><span class="line">CGContextStrokePath(contextRef);</span><br><span class="line"></span><br><span class="line">[@&quot;(450,240)&quot; drawInRect:CGRectMake(450, 220, 70, 20) withAttributes:self.attribute];</span><br><span class="line">[@&quot;(400,270)&quot; drawInRect:CGRectMake(400 - 70, 270 - 10, 70, 20) withAttributes:self.attribute];</span><br><span class="line">[@&quot;(430,310)&quot; drawInRect:CGRectMake(430, 310 + 5, 70, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> 调用CGContextMoveToPoint，设置圆弧的起点。(450,240)</span><br><span class="line"> CGContextAddArcToPoint(contextRef,400,270,430,310,50):从(450,240)到(400,270)画一条线，再从(400,270)到(430,310)画一条线，两条线和半径(40)确定出一条弧线。弧线对应的圆与两条线相切。</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">[@&quot;弧线&quot; drawInRect:CGRectMake(400, 250 + 80 + 20, 40, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CGContextSetLineWidth(contextRef, 5);</span><br><span class="line">CGContextSetStrokeColorWithColor(contextRef, [UIColor blueColor].CGColor);</span><br><span class="line">CGContextMoveToPoint(contextRef, 620, 150);</span><br><span class="line">CGContextAddArc(contextRef, 620, 150, 60,  -60 * M_PI / 180, -120 * M_PI / 180, 1);</span><br><span class="line"></span><br><span class="line">CGContextDrawPath(contextRef, kCGPathFill); //绘制路径</span><br><span class="line">//    CGContextDrawPath(contextRef, kCGPathEOFill);</span><br><span class="line">//    CGContextDrawPath(contextRef, kCGPathStroke);</span><br><span class="line">//    CGContextDrawPath(contextRef, kCGPathFillStroke);</span><br><span class="line">//    CGContextDrawPath(contextRef, kCGPathEOFillStroke);</span><br><span class="line"></span><br><span class="line">/*CGPathDrawingMode是填充方式,枚举类型</span><br><span class="line"> kCGPathFill:只有填充（非零缠绕数填充），不绘制边框</span><br><span class="line"> kCGPathEOFill:奇偶规则填充（多条路径交叉时，奇数交叉填充，偶交叉不填充）</span><br><span class="line"> kCGPathStroke:只有边框</span><br><span class="line"> kCGPathFillStroke：既有边框又有填充</span><br><span class="line"> kCGPathEOFillStroke：奇偶填充并绘制边框</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">[@&quot;扇形&quot; drawInRect:CGRectMake(600, 60 + 100 + 20, 40, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//三角形，添加多个点即可生成多边形</span><br><span class="line">CGPoint points[3];//坐标点</span><br><span class="line">points[0] = CGPointMake(600,240);//坐标点1</span><br><span class="line">points[1] = CGPointMake(600,340);//坐标点2</span><br><span class="line">points[2] = CGPointMake(650,340);//坐标点3</span><br><span class="line">CGContextAddLines(contextRef, points, 3);//添加线</span><br><span class="line">CGContextSetLineWidth(contextRef, 0);</span><br><span class="line">CGContextDrawPath(contextRef, kCGPathFillStroke); //根据坐标绘制路径</span><br><span class="line"></span><br><span class="line">[@&quot;三角形&quot; drawInRect:CGRectMake(600, 340 + 20, 50, 20) withAttributes:self.attribute];</span><br><span class="line"></span><br><span class="line">CGContextClosePath(contextRef);</span><br></pre></td></tr></table></figure></p>
+<p>代码中有较为详细的注解，这里不再介绍了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/绘图/" rel="tag"># 绘图</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/12/调试篇-1/" rel="next" title="调试篇-LLDB简介 - iOS开发">
+                <i class="fa fa-chevron-left"></i> 调试篇-LLDB简介 - iOS开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">luo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="&#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>&#x57FA;&#x672C;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图方式"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x7ED8;&#x56FE;&#x65B9;&#x5F0F;" class="headerlink" title="&#x7ED8;&#x56FE;&#x65B9;&#x5F0F;"></a>&#x7ED8;&#x56FE;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图环境（画布）"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7ED8;&#x56FE;&#x73AF;&#x5883;&#xFF08;&#x753B;&#x5E03;&#xFF09;" class="headerlink" title="&#x7ED8;&#x56FE;&#x73AF;&#x5883;&#xFF08;&#x753B;&#x5E03;&#xFF09;"></a>&#x7ED8;&#x56FE;&#x73AF;&#x5883;&#xFF08;&#x753B;&#x5E03;&#xFF09;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般图形的绘制"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x4E00;&#x822C;&#x56FE;&#x5F62;&#x7684;&#x7ED8;&#x5236;" class="headerlink" title="&#x4E00;&#x822C;&#x56FE;&#x5F62;&#x7684;&#x7ED8;&#x5236;"></a>&#x4E00;&#x822C;&#x56FE;&#x5F62;&#x7684;&#x7ED8;&#x5236;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
