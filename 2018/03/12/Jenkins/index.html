@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,效率," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta name="keywords" content="工具,效率">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins 2018">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/Jenkins/index.html">
+<meta property="og:site_name" content="Hanson">
+<meta property="og:description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/egid1hPFSsFtL2.t19bfmR2pQMk68eE8lwFxQnuQ6Co!/r/dEUBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/P7zHZYOv1sdQuUcUYv8YYF4nznm.hiPXhJjD8Um00YQ!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ySupsUW7okNyDfH5xB2iLYCt0SVMk3O74J60RHUiTbc!/r/dEQBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/kbTcYDdcmHfRMngUGeemzhiiTuNiYbW4rPhM68.BbOg!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/xEw6py1LXnRI1ZLiQTJmRqFGHjv5up3Fvi06dsEfRAU!/r/dEABAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/dk03bGcGSez3bN1Av1FTsE5xG5crfvDWPcaWzyj.qSc!/r/dPMAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/3YpUy4G.wCZfL7CoVjEts3ibbs11CFkNbYnWhgHN.ds!/r/dPMAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/h34fhRWLy3yNM1HjpsB.skgnFBpM4CHzhlCJl9XrzK4!/r/dF4BAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/J84G0iY7soBKHJYkVBVfGQWrPyB4mCiJ6n4vvunx5iQ!/r/dGgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/7K966kuaY*rRja8QLoYFUYmCc8ReHwR1dfCEESeOfW0!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/oNRkL7jRIXfLBgUTHbKOtYW86QWtGwFEBtUAhDZyIMY!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/zCB*d*.yhcF5DPrJA2jBFECAitS0fAAz*Y6KpXPn.lM!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/26mhwqrQYAtbdAWppueDNQg25V6lWNbF5*YM39KvNjk!/r/dFsBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/RIm.9E0E6lAqqXpfxUZfDfCcob8.kE6Q3PEEJ0XD5jA!/r/dAgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/LgZSPTLGLeVShDnVieixzbatW2Kf.KykK7SrDuopMik!/r/dEMBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/CVIOkIwuPF*foMOhNkvyBod*HgbX4E4wS0WZvsyKOIU!/r/dEMBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/OiOzoigUwZqyhz4w8ADOG7SqMJqrOEB5akGepVuRqiM!/r/dGgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Dmv4KFLtpQerC.t34BOmm4i00UOB.TSQtjCWP17vWdo!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/YDRgUWo4RIkvDtCdxUvHf81Y4ppVqEvBL4aT1WJhjSs!/r/dPIAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/hM0UzzzX4PEgNbpda6O58CRxr9pFvtws4Q8RHozy.rI!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/vMbyrH.co6CQY6aKXHJvi6hjyTXLVINblovFYsAnqrc!/r/dGoBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ufSe36YIlOPbffSEfRVhJEQc1G6rieXMrtoCwrqP6Uk!/r/dAgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/2By02pf.qqtBBFrN*wBMVg1QzkOY*HRpGwrqXTjo2QY!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Otu2wuxDZbakfjHDr0DVRYnLzoM1Zs7HrhtU3o9qvfo!/r/dFsBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/4QdKxz7slhcdkp.G6SnkGl8q.x4HyvaDrl1DyV.TKuo!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/KyO3xbHehW90AEq2vbHsX5NMdnLP1p3gBnO8W0ORTrM!/r/dEQBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/nQPo.iQ.3eQdbdBINmh1tIYxQrytDbafftTXBHElXEo!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/jDtEYVCy4CJDQAg1LQLgq4n74pdnR1RK5TBlVLu08uc!/r/dEABAAAAAAAA">
+<meta property="og:updated_time" content="2018-03-26T01:30:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jenkins 2018">
+<meta name="twitter:description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta name="twitter:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/12/Jenkins/"/>
+
+
+
+
+
+  <title>Jenkins 2018 | Hanson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/Jenkins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Jenkins 2018</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T09:32:55+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA" alt="logo"></p>
+<p>因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。</p>
+<a id="more"></a>
+<p>在没有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/egid1hPFSsFtL2.t19bfmR2pQMk68eE8lwFxQnuQ6Co!/r/dEUBAAAAAAAA" alt="logo"></p>
+<p>在有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/P7zHZYOv1sdQuUcUYv8YYF4nznm.hiPXhJjD8Um00YQ!/r/dEEBAAAAAAAA" alt="logo"></p>
+<p>所以我们可以明显看出，后者效率更高，操作更加简便。接下来记录一下，使用Jenkins的过程，给自己做个备忘，也可以提供参考。</p>
+<blockquote>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h4></blockquote>
+<p>本次使用的是SVN + Jenkins 进行简便化操作，首先我们去<a href="https://jenkins.io" target="_blank" rel="noopener"><strong>Jenkins官网</strong></a>下载，其中LTS Release（稳定版），Weekly Release（每周更新版本）没有太大的区别，都可以下载。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ySupsUW7okNyDfH5xB2iLYCt0SVMk3O74J60RHUiTbc!/r/dEQBAAAAAAAA" alt="logo"></p>
+<p>然后点击下载对应平台的版本。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/kbTcYDdcmHfRMngUGeemzhiiTuNiYbW4rPhM68.BbOg!/r/dEIBAAAAAAAA" alt="logo"></p>
+<p>傻瓜式安装。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/xEw6py1LXnRI1ZLiQTJmRqFGHjv5up3Fvi06dsEfRAU!/r/dEABAAAAAAAA" alt="logo"></p>
+<p>完成后，safari会自动打开<code>http://localhost:8080</code>，如果没有可自行输入。这个时候可能会报这个错。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/dk03bGcGSez3bN1Av1FTsE5xG5crfvDWPcaWzyj.qSc!/r/dPMAAAAAAAAA" alt="logo"></p>
+<p>这是因为我们没有配置Java环境，可以<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener"><strong>点击下载</strong></a>，需要注意一下Java版本，然后傻瓜式安装</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/3YpUy4G.wCZfL7CoVjEts3ibbs11CFkNbYnWhgHN.ds!/r/dPMAAAAAAAAA" alt="logo"></p>
+<p>我们再次打开<code>http://localhost:8080</code>，如果不行，重启一下。重启后我们会发现，mac新增了一个账号，但是现在我们还不知道密码。用safari打开<code>http://localhost:8080</code>，出现这个页面。表明我们的准备工作正式完成。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/h34fhRWLy3yNM1HjpsB.skgnFBpM4CHzhlCJl9XrzK4!/r/dF4BAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="配置准备"><a href="#配置准备" class="headerlink" title="配置准备"></a><strong>配置准备</strong></h4></blockquote>
+<h5 id="密码设置"><a href="#密码设置" class="headerlink" title="密码设置"></a><strong>密码设置</strong></h5><p>我们复制 <code>/Users/Shared/Jenkins/Home</code>，打开Finder，然后<code>Command-Shift-G</code>粘贴刚刚复制的路径。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/J84G0iY7soBKHJYkVBVfGQWrPyB4mCiJ6n4vvunx5iQ!/r/dGgBAAAAAAAA" alt="logo"></p>
+<p>然后修改<code>sercets</code>文件夹访问权限，右击<code>显示简介</code>，点击右下角的锁。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/7K966kuaY*rRja8QLoYFUYmCc8ReHwR1dfCEESeOfW0!/r/dEIBAAAAAAAA" alt="logo"></p>
+<p>输入mac密码后，点击权限栏下面。打开<code>initialAdminPassword</code>文件，如果也是没有权限就按照刚刚的一样，修改访问权限。将<code>initialAdminPassword</code>文件中的密码复制到safari中，点击safari中继续</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/oNRkL7jRIXfLBgUTHbKOtYW86QWtGwFEBtUAhDZyIMY!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>点击左边，跳转到下面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/zCB*d*.yhcF5DPrJA2jBFECAitS0fAAz*Y6KpXPn.lM!/r/dEEBAAAAAAAA" alt="logo"></p>
+<h5 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a><strong>创建用户</strong></h5><p>首先我们需要创建一个管理员用户</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/26mhwqrQYAtbdAWppueDNQg25V6lWNbF5*YM39KvNjk!/r/dFsBAAAAAAAA" alt="logo"></p>
+<p>创建成功后，点击跳转到欢迎页面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/RIm.9E0E6lAqqXpfxUZfDfCcob8.kE6Q3PEEJ0XD5jA!/r/dAgBAAAAAAAA" alt="logo"></p>
+<h5 id="下载插件"><a href="#下载插件" class="headerlink" title="下载插件"></a><strong>下载插件</strong></h5><p>然后我们安装一些必要的插件</p>
+<p>点击<code>系统管理</code> - <code>插件管理</code> - <code>右上角搜索</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/LgZSPTLGLeVShDnVieixzbatW2Kf.KykK7SrDuopMik!/r/dEMBAAAAAAAA" alt="logo"></p>
+<p>安装成功可在<code>系统管理</code> - <code>插件管理</code> - <code>已安装</code> 中查看</p>
+<ul>
+<li><strong>Xcode integration</strong></li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/CVIOkIwuPF*foMOhNkvyBod*HgbX4E4wS0WZvsyKOIU!/r/dEMBAAAAAAAA" alt="logo"></p>
+<ul>
+<li><strong>Keychains and Provisioning Profiles Management</strong></li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/OiOzoigUwZqyhz4w8ADOG7SqMJqrOEB5akGepVuRqiM!/r/dGgBAAAAAAAA" alt="logo"></p>
+<h5 id="配制插件"><a href="#配制插件" class="headerlink" title="配制插件"></a><strong>配制插件</strong></h5><p>配置插件信息<code>系统管理</code> - <code>系统设置</code> - <code>Xcode Builder</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Dmv4KFLtpQerC.t34BOmm4i00UOB.TSQtjCWP17vWdo!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>配置插件信息<code>系统管理</code> - <code>Keychains and Provisioning Profiles Management</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/YDRgUWo4RIkvDtCdxUvHf81Y4ppVqEvBL4aT1WJhjSs!/r/dPIAAAAAAAAA" alt="logo"></p>
+<h5 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><strong>创建项目</strong></h5><p>安装完成后我们创建一个项目</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/hM0UzzzX4PEgNbpda6O58CRxr9pFvtws4Q8RHozy.rI!/r/dFYBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>配置基本信息</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/vMbyrH.co6CQY6aKXHJvi6hjyTXLVINblovFYsAnqrc!/r/dGoBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>源码管理</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ufSe36YIlOPbffSEfRVhJEQc1G6rieXMrtoCwrqP6Uk!/r/dAgBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建环境</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/2By02pf.qqtBBFrN*wBMVg1QzkOY*HRpGwrqXTjo2QY!/r/dEEBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - General build settings</li>
+</ul>
+<blockquote>
+<p>Target为项目中的target名字、</p>
+<p>Configuration可以设置发布（Release）或测试（Debug）</p>
+<p>.ipa filename pattern为 .ipa打包后的文件名</p>
+<p>Output directory 为.ipa包目录</p>
+</blockquote>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Otu2wuxDZbakfjHDr0DVRYnLzoM1Zs7HrhtU3o9qvfo!/r/dFsBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - Code signing &amp; OS X keychain options</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/4QdKxz7slhcdkp.G6SnkGl8q.x4HyvaDrl1DyV.TKuo!/r/dEIBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - Advanced Xcode build options</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/KyO3xbHehW90AEq2vbHsX5NMdnLP1p3gBnO8W0ORTrM!/r/dEQBAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a><strong>构建项目</strong></h4></blockquote>
+<p>配置信息完成之后，跳转到构建页面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/nQPo.iQ.3eQdbdBINmh1tIYxQrytDbafftTXBHElXEo!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>点击立即构建，等待一段时间后可以打包好项目。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/jDtEYVCy4CJDQAg1LQLgq4n74pdnR1RK5TBlVLu08uc!/r/dEABAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a><strong>后记</strong></h4></blockquote>
+<p>“偷懒”是人类发展的“根源”，作为程序员，在编码的工作中，也要时常有这样的思考，优化，重构，封装，才能不断提高等级。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+            <a href="/tags/效率/" rel="tag"># 效率</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/YANXUAN/" rel="next" title="网易严选">
+                <i class="fa fa-chevron-left"></i> 网易严选
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">luo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x51C6;&#x5907;&#x5DE5;&#x4F5C;" class="headerlink" title="&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"></a><strong>&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</strong></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置准备"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x51C6;&#x5907;" class="headerlink" title="&#x914D;&#x7F6E;&#x51C6;&#x5907;"></a><strong>&#x914D;&#x7F6E;&#x51C6;&#x5907;</strong></span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#密码设置"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x5BC6;&#x7801;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x5BC6;&#x7801;&#x8BBE;&#x7F6E;"></a><strong>&#x5BC6;&#x7801;&#x8BBE;&#x7F6E;</strong></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建用户"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x7528;&#x6237;" class="headerlink" title="&#x521B;&#x5EFA;&#x7528;&#x6237;"></a><strong>&#x521B;&#x5EFA;&#x7528;&#x6237;</strong></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下载插件"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#&#x4E0B;&#x8F7D;&#x63D2;&#x4EF6;" class="headerlink" title="&#x4E0B;&#x8F7D;&#x63D2;&#x4EF6;"></a><strong>&#x4E0B;&#x8F7D;&#x63D2;&#x4EF6;</strong></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配制插件"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#&#x914D;&#x5236;&#x63D2;&#x4EF6;" class="headerlink" title="&#x914D;&#x5236;&#x63D2;&#x4EF6;"></a><strong>&#x914D;&#x5236;&#x63D2;&#x4EF6;</strong></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建项目"><span class="nav-number">2.5.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x9879;&#x76EE;" class="headerlink" title="&#x521B;&#x5EFA;&#x9879;&#x76EE;"></a><strong>&#x521B;&#x5EFA;&#x9879;&#x76EE;</strong></span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建项目"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x6784;&#x5EFA;&#x9879;&#x76EE;" class="headerlink" title="&#x6784;&#x5EFA;&#x9879;&#x76EE;"></a><strong>&#x6784;&#x5EFA;&#x9879;&#x76EE;</strong></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x540E;&#x8BB0;" class="headerlink" title="&#x540E;&#x8BB0;"></a><strong>&#x540E;&#x8BB0;</strong></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">luo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
