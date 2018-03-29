@@ -259,6 +259,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/flutter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/28/flutter/" itemprop="url">Flutter 初识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T16:05:21+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>西班牙巴塞罗那世界移动大会上，Google发布了第一个beta版的Flutter，前前后后也看了一些视频以及讲解。感觉还是比较靠谱的跨平台，最近自己倒腾了一下，才发现开发原来可以这样来。</p>
+</blockquote>
+<p>Flutter是一个软件开发工具包，可以不过多依赖原系统从而构建高性能，以及高保真的iOS，Android应用程序，在排版布局交互上能够较高的保证用户体验。</p>
+<p>我们先来看看几个亮点</p>
+<ul>
+<li>跨平台</li>
+</ul>
+<p>这个是最主要的亮点，也是Flutter得以发展的根基，无论是开发者，还是老板都希望一个人可以解决前端的所有工作，而不是iOS，Android，前端。当然现在很多再强调大前端，但其实只能说是一个人得需要具备多门技术。而Flutter则只需要一套代码就可以同时运行在两个端，当然有人会提到RN，也是可以完成跨平台，但其构建机制其实是基于原系统的UI进行“封装”，并不能算是完整意义上的跨平台。</p>
+<p>相对于nativeApp, webviewApp, React native的区别我们可以看几个对比图</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/LlVYHz1x5wqQC5i4uEKcgCKCSMYO5Hs9nxCw7VLpu6k!/r/dJEAAAAAAAAA" alt="logo" title="NativeApp"></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/2*IYhakRVUVMOJp8fN*nImpLNKaUzRO.JFCN.hR8Jz4!/r/dEIBAAAAAAAA" alt="logo" title="FlutterApp"></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/sR50fd*l.QWTumAEa8Cp92oM6UuD6kiZx95VdcKLQPc!/r/dGoBAAAAAAAA" alt="logo" title="WebviewApp"></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/Ld0Z8i91poM.STZ26MvWnyCNUv.JcDR5HMtMB4H.Xjo!/r/dFYBAAAAAAAA" alt="logo" title="React native"></p>
+<p>在WebViewApp以及React native均有一个桥接的过程，而在Flutter中使用了Dart语言避免了桥接过程中的性能损耗，从而提升了应用运行的流畅度。</p>
+<ul>
+<li>Hot reload</li>
+</ul>
+<p><img src="https://flutter.io/images/intellij/hot-reload.gif" alt="logo"></p>
+<p>实在是调试一大进步，Android没有开发过，无发言权，但是iOS开发过程中。每次当我们修改一个点，都需要Run一下。而在Hot reload则可以随时修改，在使用Android studio中，只要我们comment + s保存一下，页面就更新了。可以说是非常方便。</p>
+<p>此外还有一个进步如下图,当我们需要调试一个类似朋友圈发布的功能：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/L.cwO7Vd*JcnZONkBc4Eiouz3a0b7RLe.ypc22*ysDw!/r/dEEBAAAAAAAA" alt="logo"></p>
+<p>图中我们可以很明显的看到整个流程的优化。</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>Flutter框架内置一组丰富控件，可以快速开发UI界面，可定制性强，不受限与OEM控件的限制。</p>
+<p>本文主要是进行一些入门的介绍，后续继续添加构建的部分。</p>
+<p>参考(科学上网)：</p>
+<blockquote><footer><strong>什么是Flutter的革命</strong><cite><a href="https://juejin.im/post/5a38e3f651882527a13d9eb2" target="_blank" rel="noopener">juejin.im/post/5a38e3f651882527a13d9eb2</a></cite></footer></blockquote>
+<blockquote><footer><strong>flutter.io</strong><cite><a href="https://flutter.io/" target="_blank" rel="noopener">flutter.io</a></cite></footer></blockquote>
+<blockquote><footer><strong>Two Apps with Flutter and Firebase</strong><cite><a href="https://www.youtube.com/watch?v=w2TcYP8qiRI&t=1107s" target="_blank" rel="noopener">www.youtube.com/watch?v=w2TcYP8qiRI&t=1107s</a></cite></footer></blockquote>
+<blockquote><footer><strong>使用 Flutter 快速构建美观的移动应用</strong><cite><a href="https://www.youtube.com/watch?v=9tQUqOwBpy0" target="_blank" rel="noopener">www.youtube.com/watch?v=9tQUqOwBpy0</a></cite></footer></blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/Jenkins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -733,7 +885,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -755,7 +907,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
