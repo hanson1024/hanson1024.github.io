@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hanson</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-11-03T01:38:06.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>luo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flutter 初识</title>
+    <link href="http://yoursite.com/2018/03/28/flutter/"/>
+    <id>http://yoursite.com/2018/03/28/flutter/</id>
+    <published>2018-03-28T08:05:21.000Z</published>
+    <updated>2018-11-03T01:38:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/b1.Mj01AIZ7j50YRpCikOKAlVg3rGHNO2xGWCMrK5sk!/r/dEQBAAAAAAAA" alt="."></p><blockquote><p>西班牙巴塞罗那世界移动大会上，Google发布了第一个beta版的Flutter，前前后后也看了一些视频以及讲解。感觉还是比较靠谱的跨平台，最近自己倒腾了一下，才发现开发原来可以这样来。</p></blockquote><p>Flutter是一个软件开发工具包，可以不过多依赖原系统从而构建高性能，以及高保真的iOS，Android应用程序，在排版布局交互上能够较高的保证用户体验。</p><a id="more"></a><p>我们先来看看几个亮点</p><ul><li>跨平台</li></ul><p>这个是最主要的亮点，也是Flutter得以发展的根基，无论是开发者，还是老板都希望一个人可以解决前端的所有工作，而不是iOS，Android，前端。当然现在很多再强调大前端，但其实只能说是一个人得需要具备多门技术。而Flutter则只需要一套代码就可以同时运行在两个端，当然有人会提到RN，也是可以完成跨平台，但其构建机制其实是基于原系统的UI进行“封装”，并不能算是完整意义上的跨平台。</p><p>相对于nativeApp, webviewApp, React native的区别我们可以看几个对比图</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/LlVYHz1x5wqQC5i4uEKcgCKCSMYO5Hs9nxCw7VLpu6k!/r/dJEAAAAAAAAA" alt="logo" title="NativeApp"></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/2*IYhakRVUVMOJp8fN*nImpLNKaUzRO.JFCN.hR8Jz4!/r/dEIBAAAAAAAA" alt="logo" title="FlutterApp"></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/sR50fd*l.QWTumAEa8Cp92oM6UuD6kiZx95VdcKLQPc!/r/dGoBAAAAAAAA" alt="logo" title="WebviewApp"></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/Ld0Z8i91poM.STZ26MvWnyCNUv.JcDR5HMtMB4H.Xjo!/r/dFYBAAAAAAAA" alt="logo" title="React native"></p><p>在WebViewApp以及React native均有一个桥接的过程，而在Flutter中使用了Dart语言避免了桥接过程中的性能损耗，从而提升了应用运行的流畅度。</p><ul><li>Hot reload</li></ul><p><img src="https://flutter.io/images/intellij/hot-reload.gif" alt="logo"></p><p>实在是调试一大进步，Android没有开发过，无发言权，但是iOS开发过程中。每次当我们修改一个点，都需要Run一下。而在Hot reload则可以随时修改，在使用Android studio中，只要我们comment + s保存一下，页面就更新了。可以说是非常方便。</p><p>此外还有一个进步如下图,当我们需要调试一个类似朋友圈发布的功能：</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/L.cwO7Vd*JcnZONkBc4Eiouz3a0b7RLe.ypc22*ysDw!/r/dEEBAAAAAAAA" alt="logo"></p><p>图中我们可以很明显的看到整个流程的优化。</p><ul><li>其他</li></ul><p>Flutter框架内置一组丰富控件，可以快速开发UI界面，可定制性强，不受限与OEM控件的限制。</p><p>本文主要是进行一些入门的介绍，后续继续添加构建的部分。</p><p>参考(科学上网)：</p><blockquote><footer><strong>什么是Flutter的革命</strong><cite><a href="https://juejin.im/post/5a38e3f651882527a13d9eb2" target="_blank" rel="noopener">juejin.im/post/5a38e3f651882527a13d9eb2</a></cite></footer></blockquote><blockquote><footer><strong>flutter.io</strong><cite><a href="https://flutter.io/" target="_blank" rel="noopener">flutter.io</a></cite></footer></blockquote><blockquote><footer><strong>Two Apps with Flutter and Firebase</strong><cite><a href="https://www.youtube.com/watch?v=w2TcYP8qiRI&t=1107s" target="_blank" rel="noopener">www.youtube.com/watch?v=w2TcYP8qiRI&t=1107s</a></cite></footer></blockquote><blockquote><footer><strong>使用 Flutter 快速构建美观的移动应用</strong><cite><a href="https://www.youtube.com/watch?v=9tQUqOwBpy0" target="_blank" rel="noopener">www.youtube.com/watch?v=9tQUqOwBpy0</a></cite></footer></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://r.photo.store.qq.com/psb?/V12RuddS2GfR1A/b1.Mj01AIZ7j50YRpCikOKAlVg3rGHNO2xGWCMrK5sk!/r/dEQBAAAAAAAA&quot; alt=&quot;.&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;西班牙巴塞罗那世界移动大会上，Google发布了第一个beta版的Flutter，前前后后也看了一些视频以及讲解。感觉还是比较靠谱的跨平台，最近自己倒腾了一下，才发现开发原来可以这样来。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Flutter是一个软件开发工具包，可以不过多依赖原系统从而构建高性能，以及高保真的iOS，Android应用程序，在排版布局交互上能够较高的保证用户体验。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="flutter" scheme="http://yoursite.com/categories/flutter/"/>
+    
+    
+      <category term="flutter" scheme="http://yoursite.com/tags/flutter/"/>
+    
+      <category term="跨平台" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jenkins 2018</title>
+    <link href="http://yoursite.com/2018/03/12/Jenkins/"/>
+    <id>http://yoursite.com/2018/03/12/Jenkins/</id>
+    <published>2018-03-12T01:32:55.000Z</published>
+    <updated>2018-03-26T01:30:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA" alt="logo"></p><p>因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。</p><a id="more"></a><p>在没有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/egid1hPFSsFtL2.t19bfmR2pQMk68eE8lwFxQnuQ6Co!/r/dEUBAAAAAAAA" alt="logo"></p><p>在有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/P7zHZYOv1sdQuUcUYv8YYF4nznm.hiPXhJjD8Um00YQ!/r/dEEBAAAAAAAA" alt="logo"></p><p>所以我们可以明显看出，后者效率更高，操作更加简便。接下来记录一下，使用Jenkins的过程，给自己做个备忘，也可以提供参考。</p><blockquote><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h4></blockquote><p>本次使用的是SVN + Jenkins 进行简便化操作，首先我们去<a href="https://jenkins.io" target="_blank" rel="noopener"><strong>Jenkins官网</strong></a>下载，其中LTS Release（稳定版），Weekly Release（每周更新版本）没有太大的区别，都可以下载。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ySupsUW7okNyDfH5xB2iLYCt0SVMk3O74J60RHUiTbc!/r/dEQBAAAAAAAA" alt="logo"></p><p>然后点击下载对应平台的版本。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/kbTcYDdcmHfRMngUGeemzhiiTuNiYbW4rPhM68.BbOg!/r/dEIBAAAAAAAA" alt="logo"></p><p>傻瓜式安装。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/xEw6py1LXnRI1ZLiQTJmRqFGHjv5up3Fvi06dsEfRAU!/r/dEABAAAAAAAA" alt="logo"></p><p>完成后，safari会自动打开<code>http://localhost:8080</code>，如果没有可自行输入。这个时候可能会报这个错。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/dk03bGcGSez3bN1Av1FTsE5xG5crfvDWPcaWzyj.qSc!/r/dPMAAAAAAAAA" alt="logo"></p><p>这是因为我们没有配置Java环境，可以<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener"><strong>点击下载</strong></a>，需要注意一下Java版本，然后傻瓜式安装</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/3YpUy4G.wCZfL7CoVjEts3ibbs11CFkNbYnWhgHN.ds!/r/dPMAAAAAAAAA" alt="logo"></p><p>我们再次打开<code>http://localhost:8080</code>，如果不行，重启一下。重启后我们会发现，mac新增了一个账号，但是现在我们还不知道密码。用safari打开<code>http://localhost:8080</code>，出现这个页面。表明我们的准备工作正式完成。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/h34fhRWLy3yNM1HjpsB.skgnFBpM4CHzhlCJl9XrzK4!/r/dF4BAAAAAAAA" alt="logo"></p><blockquote><h4 id="配置准备"><a href="#配置准备" class="headerlink" title="配置准备"></a><strong>配置准备</strong></h4></blockquote><h5 id="密码设置"><a href="#密码设置" class="headerlink" title="密码设置"></a><strong>密码设置</strong></h5><p>我们复制 <code>/Users/Shared/Jenkins/Home</code>，打开Finder，然后<code>Command-Shift-G</code>粘贴刚刚复制的路径。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/J84G0iY7soBKHJYkVBVfGQWrPyB4mCiJ6n4vvunx5iQ!/r/dGgBAAAAAAAA" alt="logo"></p><p>然后修改<code>sercets</code>文件夹访问权限，右击<code>显示简介</code>，点击右下角的锁。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/7K966kuaY*rRja8QLoYFUYmCc8ReHwR1dfCEESeOfW0!/r/dEIBAAAAAAAA" alt="logo"></p><p>输入mac密码后，点击权限栏下面。打开<code>initialAdminPassword</code>文件，如果也是没有权限就按照刚刚的一样，修改访问权限。将<code>initialAdminPassword</code>文件中的密码复制到safari中，点击safari中继续</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/oNRkL7jRIXfLBgUTHbKOtYW86QWtGwFEBtUAhDZyIMY!/r/dFYBAAAAAAAA" alt="logo"></p><p>点击左边，跳转到下面</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/zCB*d*.yhcF5DPrJA2jBFECAitS0fAAz*Y6KpXPn.lM!/r/dEEBAAAAAAAA" alt="logo"></p><h5 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a><strong>创建用户</strong></h5><p>首先我们需要创建一个管理员用户</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/26mhwqrQYAtbdAWppueDNQg25V6lWNbF5*YM39KvNjk!/r/dFsBAAAAAAAA" alt="logo"></p><p>创建成功后，点击跳转到欢迎页面</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/RIm.9E0E6lAqqXpfxUZfDfCcob8.kE6Q3PEEJ0XD5jA!/r/dAgBAAAAAAAA" alt="logo"></p><h5 id="下载插件"><a href="#下载插件" class="headerlink" title="下载插件"></a><strong>下载插件</strong></h5><p>然后我们安装一些必要的插件</p><p>点击<code>系统管理</code> - <code>插件管理</code> - <code>右上角搜索</code></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/LgZSPTLGLeVShDnVieixzbatW2Kf.KykK7SrDuopMik!/r/dEMBAAAAAAAA" alt="logo"></p><p>安装成功可在<code>系统管理</code> - <code>插件管理</code> - <code>已安装</code> 中查看</p><ul><li><strong>Xcode integration</strong></li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/CVIOkIwuPF*foMOhNkvyBod*HgbX4E4wS0WZvsyKOIU!/r/dEMBAAAAAAAA" alt="logo"></p><ul><li><strong>Keychains and Provisioning Profiles Management</strong></li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/OiOzoigUwZqyhz4w8ADOG7SqMJqrOEB5akGepVuRqiM!/r/dGgBAAAAAAAA" alt="logo"></p><h5 id="配制插件"><a href="#配制插件" class="headerlink" title="配制插件"></a><strong>配制插件</strong></h5><p>配置插件信息<code>系统管理</code> - <code>系统设置</code> - <code>Xcode Builder</code></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Dmv4KFLtpQerC.t34BOmm4i00UOB.TSQtjCWP17vWdo!/r/dFYBAAAAAAAA" alt="logo"></p><p>配置插件信息<code>系统管理</code> - <code>Keychains and Provisioning Profiles Management</code></p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/YDRgUWo4RIkvDtCdxUvHf81Y4ppVqEvBL4aT1WJhjSs!/r/dPIAAAAAAAAA" alt="logo"></p><h5 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><strong>创建项目</strong></h5><p>安装完成后我们创建一个项目</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/hM0UzzzX4PEgNbpda6O58CRxr9pFvtws4Q8RHozy.rI!/r/dFYBAAAAAAAA" alt="logo"></p><ul><li>配置基本信息</li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/vMbyrH.co6CQY6aKXHJvi6hjyTXLVINblovFYsAnqrc!/r/dGoBAAAAAAAA" alt="logo"></p><ul><li>源码管理</li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ufSe36YIlOPbffSEfRVhJEQc1G6rieXMrtoCwrqP6Uk!/r/dAgBAAAAAAAA" alt="logo"></p><ul><li>构建环境</li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/2By02pf.qqtBBFrN*wBMVg1QzkOY*HRpGwrqXTjo2QY!/r/dEEBAAAAAAAA" alt="logo"></p><ul><li>构建 - General build settings</li></ul><blockquote><p>Target为项目中的target名字、</p><p>Configuration可以设置发布（Release）或测试（Debug）</p><p>.ipa filename pattern为 .ipa打包后的文件名</p><p>Output directory 为.ipa包目录</p></blockquote><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Otu2wuxDZbakfjHDr0DVRYnLzoM1Zs7HrhtU3o9qvfo!/r/dFsBAAAAAAAA" alt="logo"></p><ul><li>构建 - Code signing &amp; OS X keychain options</li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/4QdKxz7slhcdkp.G6SnkGl8q.x4HyvaDrl1DyV.TKuo!/r/dEIBAAAAAAAA" alt="logo"></p><ul><li>构建 - Advanced Xcode build options</li></ul><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/KyO3xbHehW90AEq2vbHsX5NMdnLP1p3gBnO8W0ORTrM!/r/dEQBAAAAAAAA" alt="logo"></p><blockquote><h4 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a><strong>构建项目</strong></h4></blockquote><p>配置信息完成之后，跳转到构建页面</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/nQPo.iQ.3eQdbdBINmh1tIYxQrytDbafftTXBHElXEo!/r/dFYBAAAAAAAA" alt="logo"></p><p>点击立即构建，等待一段时间后可以打包好项目。</p><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/jDtEYVCy4CJDQAg1LQLgq4n74pdnR1RK5TBlVLu08uc!/r/dEABAAAAAAAA" alt="logo"></p><blockquote><h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a><strong>后记</strong></h4></blockquote><p>“偷懒”是人类发展的“根源”，作为程序员，在编码的工作中，也要时常有这样的思考，优化，重构，封装，才能不断提高等级。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA&quot; alt=&quot;logo&quot;&gt;&lt;/p&gt;
+&lt;p&gt;因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="效率" scheme="http://yoursite.com/tags/%E6%95%88%E7%8E%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网易严选</title>
+    <link href="http://yoursite.com/2018/02/20/YANXUAN/"/>
+    <id>http://yoursite.com/2018/02/20/YANXUAN/</id>
+    <published>2018-02-20T06:46:49.000Z</published>
+    <updated>2018-03-20T08:01:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/AU3HrtMHlW5WZviucq5oB.vXaCcBUkgjcH0tuPv6FZw!/r/dEIBAAAAAAAA" alt="logo"></p><p>个人对网易出品的应用都比较有好感，网易云音乐，网易严选，蜗牛阅读等，用户体验都是比较好的，用“精致”形容不为过。再加上之前公司的项目详情页面采用的就是像素级别仿照。当然现在网易严选的部分版面又有了调整。因为公司最近没有太多事情，所以就用了几天重新仿写了最新版本的网易严选详情页面，像素级别的仿照。</p><a id="more"></a><blockquote><h4 id="点"><a href="#点" class="headerlink" title="点"></a><strong>点</strong></h4></blockquote><ul><li>页面任意组合布局</li><li>商品图片下拉缩放</li><li>页面上拉动画，滚动页面</li><li>基于UICollectionView换行布局，适用商品多规格选择（服务cell）</li><li>继承，分类，Runtime一键添加控件</li><li>代码精细化，保证各个类中代码行数</li><li>HTML数据抓取</li><li>异步，多线程，KVC数据处理</li><li>交互与严选保持一致</li></ul><blockquote><h4 id="图"><a href="#图" class="headerlink" title="图"></a><strong>图</strong></h4></blockquote><p><img src="http://wx2.sinaimg.cn/large/64c125d7gy1fpgwgf58fcg20a00jnhe0.gif" alt="logo"></p><blockquote><h4 id="构"><a href="#构" class="headerlink" title="构"></a><strong>构</strong></h4></blockquote><p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/Uqu2QawX0RnBGxN8x5V2epX*t65UQZMYR*pqTqWgSVQ!/r/dEQBAAAAAAAA" alt="logo"></p><blockquote><h4 id="待"><a href="#待" class="headerlink" title="待"></a><strong>待</strong></h4></blockquote><ul><li>评论页面跳转</li><li>规格数量选择</li><li>服务详情弹窗</li><li>转发弹窗</li></ul><blockquote><footer><strong>Demo</strong><cite><a href="https://github.com/hanson1024/wangyiyanxuan" target="_blank" rel="noopener">github.com/hanson1024/wangyiyanxuan</a></cite></footer></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/AU3HrtMHlW5WZviucq5oB.vXaCcBUkgjcH0tuPv6FZw!/r/dEIBAAAAAAAA&quot; alt=&quot;logo&quot;&gt;&lt;/p&gt;
+&lt;p&gt;个人对网易出品的应用都比较有好感，网易云音乐，网易严选，蜗牛阅读等，用户体验都是比较好的，用“精致”形容不为过。再加上之前公司的项目详情页面采用的就是像素级别仿照。当然现在网易严选的部分版面又有了调整。因为公司最近没有太多事情，所以就用了几天重新仿写了最新版本的网易严选详情页面，像素级别的仿照。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="模仿" scheme="http://yoursite.com/categories/%E6%A8%A1%E4%BB%BF/"/>
+    
+    
+      <category term="网易" scheme="http://yoursite.com/tags/%E7%BD%91%E6%98%93/"/>
+    
+      <category term="模仿" scheme="http://yoursite.com/tags/%E6%A8%A1%E4%BB%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>年末2017</title>
+    <link href="http://yoursite.com/2017/12/30/%E5%B9%B4%E6%9C%AB2017/"/>
+    <id>http://yoursite.com/2017/12/30/年末2017/</id>
+    <published>2017-12-30T06:00:56.000Z</published>
+    <updated>2018-03-29T09:03:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/1Hj2iOHToO9uvBNDf36*cLG08F9djRTsvw*pcOXyXM4!/r/dAgBAAAAAAAA" alt="logo"></p><p>回顾17，迎接18年</p><a id="more"></a><blockquote><h4 id="工作"><a href="#工作" class="headerlink" title="工作"></a><strong>工作</strong></h4></blockquote><p>17年有点类似高产，从16年底到17年底一共完成三款应用的上架，伴随着的是都习惯性的加班，个人的总结少了很多，很多都是业务代码的构写。主要是也是公司的“战略”比较多。</p><p>今年是独立开发的开始，项目中的所有都是自己拿主意。有了更多的自由度，也有了更多的尝试。</p><p>从湖南到广州，工作环境的变化，个人效率也高了不少。</p><p>因为现在招聘好一点基本上会看看你的GitHub，个人博客。不像前几年会拉点控件都可以找到一份不错的工作。世界在进步，只有在浪潮退去之后，才知道谁是裸泳，谁在摸鱼。最近开通了个人博客，也准备把躺在印象笔记里面的东西搬出来，以后也陆续更新一些个人的文章，GitHub里面也准备时常更新一些代码，发现之前空白都是比较多。尴尬。。。</p><p><strong>iOS</strong></p><p>目前一个项目是采用swift，Objective-C混编，明年3月份有一个新的项目准备全面采用swift，以后主力采用swift。</p><p><strong>尝试</strong></p><p>小程序也是写了一个Demo就没有下文了，原因也是项目紧，连续几个月的995。。</p><p>机器学习，报了优达学院的入门课程，目前还差P3，P4没有完成。感觉有点打水漂了。</p><p>因为机器学习需要Python，所以陆陆续续学了一段时间，但是由于项目紧又停了一段时间了。</p><blockquote><h4 id="生活"><a href="#生活" class="headerlink" title="生活"></a><strong>生活</strong></h4></blockquote><p>结束了晚上回家没有人开灯的情况，虽然两个人都加班比较多。。</p><p>生活没那么贫乏了</p><p>更加有规律，除了晚睡习惯</p><p>除了辣椒，其他东西也有好吃的</p><p>身边的长辈都老了，到了该享乐的年纪，却没有享乐的条件</p><p>物质条件更加好了，却越来越忙</p><blockquote><h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a><strong>最后</strong></h4></blockquote><p>工作方面，需要更多的总结，时常更新内容，向高级开发进军。</p><p>生活方面，保重身体。</p><p><strong>2018</strong></p><ul><li>提高iOS开发能力</li><li>Flutter, react-native, Weex</li><li>小程序</li><li>开源一个到两个swift框架</li><li>上架一个iOS应用</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://r.photo.store.qq.com/psb?/V12RuddS4X20zt/1Hj2iOHToO9uvBNDf36*cLG08F9djRTsvw*pcOXyXM4!/r/dAgBAAAAAAAA&quot; alt=&quot;logo&quot;&gt;&lt;/p&gt;
+&lt;p&gt;回顾17，迎接18年&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="工作" scheme="http://yoursite.com/tags/%E5%B7%A5%E4%BD%9C/"/>
+    
+  </entry>
+  
+</feed>

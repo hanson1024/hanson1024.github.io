@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>Jenkins 2018 - Hanson</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta name="keywords" content="工具,效率">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins 2018">
+<meta property="og:url" content="http://yoursite.com/2018/03/12/Jenkins/index.html">
+<meta property="og:site_name" content="Hanson">
+<meta property="og:description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/egid1hPFSsFtL2.t19bfmR2pQMk68eE8lwFxQnuQ6Co!/r/dEUBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/P7zHZYOv1sdQuUcUYv8YYF4nznm.hiPXhJjD8Um00YQ!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ySupsUW7okNyDfH5xB2iLYCt0SVMk3O74J60RHUiTbc!/r/dEQBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/kbTcYDdcmHfRMngUGeemzhiiTuNiYbW4rPhM68.BbOg!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/xEw6py1LXnRI1ZLiQTJmRqFGHjv5up3Fvi06dsEfRAU!/r/dEABAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/dk03bGcGSez3bN1Av1FTsE5xG5crfvDWPcaWzyj.qSc!/r/dPMAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/3YpUy4G.wCZfL7CoVjEts3ibbs11CFkNbYnWhgHN.ds!/r/dPMAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/h34fhRWLy3yNM1HjpsB.skgnFBpM4CHzhlCJl9XrzK4!/r/dF4BAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/J84G0iY7soBKHJYkVBVfGQWrPyB4mCiJ6n4vvunx5iQ!/r/dGgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/7K966kuaY*rRja8QLoYFUYmCc8ReHwR1dfCEESeOfW0!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/oNRkL7jRIXfLBgUTHbKOtYW86QWtGwFEBtUAhDZyIMY!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/zCB*d*.yhcF5DPrJA2jBFECAitS0fAAz*Y6KpXPn.lM!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/26mhwqrQYAtbdAWppueDNQg25V6lWNbF5*YM39KvNjk!/r/dFsBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/RIm.9E0E6lAqqXpfxUZfDfCcob8.kE6Q3PEEJ0XD5jA!/r/dAgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/LgZSPTLGLeVShDnVieixzbatW2Kf.KykK7SrDuopMik!/r/dEMBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/CVIOkIwuPF*foMOhNkvyBod*HgbX4E4wS0WZvsyKOIU!/r/dEMBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/OiOzoigUwZqyhz4w8ADOG7SqMJqrOEB5akGepVuRqiM!/r/dGgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Dmv4KFLtpQerC.t34BOmm4i00UOB.TSQtjCWP17vWdo!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/YDRgUWo4RIkvDtCdxUvHf81Y4ppVqEvBL4aT1WJhjSs!/r/dPIAAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/hM0UzzzX4PEgNbpda6O58CRxr9pFvtws4Q8RHozy.rI!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/vMbyrH.co6CQY6aKXHJvi6hjyTXLVINblovFYsAnqrc!/r/dGoBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ufSe36YIlOPbffSEfRVhJEQc1G6rieXMrtoCwrqP6Uk!/r/dAgBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/2By02pf.qqtBBFrN*wBMVg1QzkOY*HRpGwrqXTjo2QY!/r/dEEBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Otu2wuxDZbakfjHDr0DVRYnLzoM1Zs7HrhtU3o9qvfo!/r/dFsBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/4QdKxz7slhcdkp.G6SnkGl8q.x4HyvaDrl1DyV.TKuo!/r/dEIBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/KyO3xbHehW90AEq2vbHsX5NMdnLP1p3gBnO8W0ORTrM!/r/dEQBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/nQPo.iQ.3eQdbdBINmh1tIYxQrytDbafftTXBHElXEo!/r/dFYBAAAAAAAA">
+<meta property="og:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/jDtEYVCy4CJDQAg1LQLgq4n74pdnR1RK5TBlVLu08uc!/r/dEABAAAAAAAA">
+<meta property="og:updated_time" content="2018-03-26T01:30:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jenkins 2018">
+<meta name="twitter:description" content="因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。">
+<meta name="twitter:image" content="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+    
+
+    
+    
+    
+    <style>body>.navbar,body>.section,body>.footer{opacity: 0}</style>
+    
+
+    
+    
+    
+    
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+<style>
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #3273dc;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+</style>
+
+    
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-03-12T01:32:55.000Z">2018-03-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1428 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Jenkins 2018
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/pQksX8SDtjHAMSrAsP6kMNWN5zrwBfZGy2OotkcODhI!/r/dGoBAAAAAAAA" alt="logo"></p>
+<p>因为人类偷懒天性，所以当发现繁琐重复的操作，就会想办法简化相应的操作。</p>
+<a id="more"></a>
+<p>在没有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/egid1hPFSsFtL2.t19bfmR2pQMk68eE8lwFxQnuQ6Co!/r/dEUBAAAAAAAA" alt="logo"></p>
+<p>在有Jenkins的时候，我们需要打包给测试同学的操作是这样：</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/P7zHZYOv1sdQuUcUYv8YYF4nznm.hiPXhJjD8Um00YQ!/r/dEEBAAAAAAAA" alt="logo"></p>
+<p>所以我们可以明显看出，后者效率更高，操作更加简便。接下来记录一下，使用Jenkins的过程，给自己做个备忘，也可以提供参考。</p>
+<blockquote>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h4></blockquote>
+<p>本次使用的是SVN + Jenkins 进行简便化操作，首先我们去<a href="https://jenkins.io" target="_blank" rel="noopener"><strong>Jenkins官网</strong></a>下载，其中LTS Release（稳定版），Weekly Release（每周更新版本）没有太大的区别，都可以下载。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ySupsUW7okNyDfH5xB2iLYCt0SVMk3O74J60RHUiTbc!/r/dEQBAAAAAAAA" alt="logo"></p>
+<p>然后点击下载对应平台的版本。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/kbTcYDdcmHfRMngUGeemzhiiTuNiYbW4rPhM68.BbOg!/r/dEIBAAAAAAAA" alt="logo"></p>
+<p>傻瓜式安装。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/xEw6py1LXnRI1ZLiQTJmRqFGHjv5up3Fvi06dsEfRAU!/r/dEABAAAAAAAA" alt="logo"></p>
+<p>完成后，safari会自动打开<code>http://localhost:8080</code>，如果没有可自行输入。这个时候可能会报这个错。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/dk03bGcGSez3bN1Av1FTsE5xG5crfvDWPcaWzyj.qSc!/r/dPMAAAAAAAAA" alt="logo"></p>
+<p>这是因为我们没有配置Java环境，可以<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener"><strong>点击下载</strong></a>，需要注意一下Java版本，然后傻瓜式安装</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/3YpUy4G.wCZfL7CoVjEts3ibbs11CFkNbYnWhgHN.ds!/r/dPMAAAAAAAAA" alt="logo"></p>
+<p>我们再次打开<code>http://localhost:8080</code>，如果不行，重启一下。重启后我们会发现，mac新增了一个账号，但是现在我们还不知道密码。用safari打开<code>http://localhost:8080</code>，出现这个页面。表明我们的准备工作正式完成。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/h34fhRWLy3yNM1HjpsB.skgnFBpM4CHzhlCJl9XrzK4!/r/dF4BAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="配置准备"><a href="#配置准备" class="headerlink" title="配置准备"></a><strong>配置准备</strong></h4></blockquote>
+<h5 id="密码设置"><a href="#密码设置" class="headerlink" title="密码设置"></a><strong>密码设置</strong></h5><p>我们复制 <code>/Users/Shared/Jenkins/Home</code>，打开Finder，然后<code>Command-Shift-G</code>粘贴刚刚复制的路径。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/J84G0iY7soBKHJYkVBVfGQWrPyB4mCiJ6n4vvunx5iQ!/r/dGgBAAAAAAAA" alt="logo"></p>
+<p>然后修改<code>sercets</code>文件夹访问权限，右击<code>显示简介</code>，点击右下角的锁。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/7K966kuaY*rRja8QLoYFUYmCc8ReHwR1dfCEESeOfW0!/r/dEIBAAAAAAAA" alt="logo"></p>
+<p>输入mac密码后，点击权限栏下面。打开<code>initialAdminPassword</code>文件，如果也是没有权限就按照刚刚的一样，修改访问权限。将<code>initialAdminPassword</code>文件中的密码复制到safari中，点击safari中继续</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/oNRkL7jRIXfLBgUTHbKOtYW86QWtGwFEBtUAhDZyIMY!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>点击左边，跳转到下面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/zCB*d*.yhcF5DPrJA2jBFECAitS0fAAz*Y6KpXPn.lM!/r/dEEBAAAAAAAA" alt="logo"></p>
+<h5 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a><strong>创建用户</strong></h5><p>首先我们需要创建一个管理员用户</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/26mhwqrQYAtbdAWppueDNQg25V6lWNbF5*YM39KvNjk!/r/dFsBAAAAAAAA" alt="logo"></p>
+<p>创建成功后，点击跳转到欢迎页面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/RIm.9E0E6lAqqXpfxUZfDfCcob8.kE6Q3PEEJ0XD5jA!/r/dAgBAAAAAAAA" alt="logo"></p>
+<h5 id="下载插件"><a href="#下载插件" class="headerlink" title="下载插件"></a><strong>下载插件</strong></h5><p>然后我们安装一些必要的插件</p>
+<p>点击<code>系统管理</code> - <code>插件管理</code> - <code>右上角搜索</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/LgZSPTLGLeVShDnVieixzbatW2Kf.KykK7SrDuopMik!/r/dEMBAAAAAAAA" alt="logo"></p>
+<p>安装成功可在<code>系统管理</code> - <code>插件管理</code> - <code>已安装</code> 中查看</p>
+<ul>
+<li><strong>Xcode integration</strong></li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/CVIOkIwuPF*foMOhNkvyBod*HgbX4E4wS0WZvsyKOIU!/r/dEMBAAAAAAAA" alt="logo"></p>
+<ul>
+<li><strong>Keychains and Provisioning Profiles Management</strong></li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/OiOzoigUwZqyhz4w8ADOG7SqMJqrOEB5akGepVuRqiM!/r/dGgBAAAAAAAA" alt="logo"></p>
+<h5 id="配制插件"><a href="#配制插件" class="headerlink" title="配制插件"></a><strong>配制插件</strong></h5><p>配置插件信息<code>系统管理</code> - <code>系统设置</code> - <code>Xcode Builder</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Dmv4KFLtpQerC.t34BOmm4i00UOB.TSQtjCWP17vWdo!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>配置插件信息<code>系统管理</code> - <code>Keychains and Provisioning Profiles Management</code></p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/YDRgUWo4RIkvDtCdxUvHf81Y4ppVqEvBL4aT1WJhjSs!/r/dPIAAAAAAAAA" alt="logo"></p>
+<h5 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><strong>创建项目</strong></h5><p>安装完成后我们创建一个项目</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/hM0UzzzX4PEgNbpda6O58CRxr9pFvtws4Q8RHozy.rI!/r/dFYBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>配置基本信息</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/vMbyrH.co6CQY6aKXHJvi6hjyTXLVINblovFYsAnqrc!/r/dGoBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>源码管理</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/ufSe36YIlOPbffSEfRVhJEQc1G6rieXMrtoCwrqP6Uk!/r/dAgBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建环境</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/2By02pf.qqtBBFrN*wBMVg1QzkOY*HRpGwrqXTjo2QY!/r/dEEBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - General build settings</li>
+</ul>
+<blockquote>
+<p>Target为项目中的target名字、</p>
+<p>Configuration可以设置发布（Release）或测试（Debug）</p>
+<p>.ipa filename pattern为 .ipa打包后的文件名</p>
+<p>Output directory 为.ipa包目录</p>
+</blockquote>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/Otu2wuxDZbakfjHDr0DVRYnLzoM1Zs7HrhtU3o9qvfo!/r/dFsBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - Code signing &amp; OS X keychain options</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/4QdKxz7slhcdkp.G6SnkGl8q.x4HyvaDrl1DyV.TKuo!/r/dEIBAAAAAAAA" alt="logo"></p>
+<ul>
+<li>构建 - Advanced Xcode build options</li>
+</ul>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/KyO3xbHehW90AEq2vbHsX5NMdnLP1p3gBnO8W0ORTrM!/r/dEQBAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a><strong>构建项目</strong></h4></blockquote>
+<p>配置信息完成之后，跳转到构建页面</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/nQPo.iQ.3eQdbdBINmh1tIYxQrytDbafftTXBHElXEo!/r/dFYBAAAAAAAA" alt="logo"></p>
+<p>点击立即构建，等待一段时间后可以打包好项目。</p>
+<p><img src="http://r.photo.store.qq.com/psb?/V12RuddS3FRIrF/jDtEYVCy4CJDQAg1LQLgq4n74pdnR1RK5TBlVLu08uc!/r/dEABAAAAAAAA" alt="logo"></p>
+<blockquote>
+<h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a><strong>后记</strong></h4></blockquote>
+<p>“偷懒”是人类发展的“根源”，作为程序员，在编码的工作中，也要时常有这样的思考，优化，重构，封装，才能不断提高等级。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/工具/">工具</a>, <a class="has-link-grey -link" href="/tags/效率/">效率</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/03/28/flutter/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Flutter 初识</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/02/20/YANXUAN/">
+                <span class="level-item">网易严选</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png">
+                    
+                    <p class="is-size-4 is-block">
+                        Your name
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Your title
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/ppoffice">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="http://github.com/ppoffice">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="http://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="http://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="http://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/ppoffice</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/flutter/">
+            <span class="level-start">
+                <span class="level-item">flutter</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/工具/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/模仿/">
+            <span class="level-start">
+                <span class="level-item">模仿</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/生活/">
+            <span class="level-start">
+                <span class="level-item">生活</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/flutter/" style="font-size: 10px;">flutter</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/效率/" style="font-size: 10px;">效率</a> <a href="/tags/模仿/" style="font-size: 10px;">模仿</a> <a href="/tags/网易/" style="font-size: 10px;">网易</a> <a href="/tags/跨平台/" style="font-size: 10px;">跨平台</a>
+    </div>
+</div>
+
+    
+    
+        <div class="card card-transparent is-hidden-widescreen">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/03/28/flutter/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter 初识">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-28T08:05:21.000Z">2018-03-28</time></div>
+                    <a href="/2018/03/28/flutter/" class="has-link-black-ter is-size-6">Flutter 初识</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/flutter/">flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/12/Jenkins/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Jenkins 2018">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-12T01:32:55.000Z">2018-03-12</time></div>
+                    <a href="/2018/03/12/Jenkins/" class="has-link-black-ter is-size-6">Jenkins 2018</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/02/20/YANXUAN/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="网易严选">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-02-20T06:46:49.000Z">2018-02-20</time></div>
+                    <a href="/2018/02/20/YANXUAN/" class="has-link-black-ter is-size-6">网易严选</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/模仿/">模仿</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/30/年末2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="年末2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-30T06:00:56.000Z">2017-12-30</time></div>
+                    <a href="/2017/12/30/年末2017/" class="has-link-black-ter is-size-6">年末2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/生活/">生活</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/flutter/">
+                        <span class="level-start">
+                            <span class="level-item">flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工作/">
+                        <span class="level-start">
+                            <span class="level-item">工作</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/总结/">
+                        <span class="level-start">
+                            <span class="level-item">总结</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/效率/">
+                        <span class="level-start">
+                            <span class="level-item">效率</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/模仿/">
+                        <span class="level-start">
+                            <span class="level-item">模仿</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/网易/">
+                        <span class="level-start">
+                            <span class="level-item">网易</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/跨平台/">
+                        <span class="level-start">
+                            <span class="level-item">跨平台</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/03/28/flutter/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Flutter 初识">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-28T08:05:21.000Z">2018-03-28</time></div>
+                    <a href="/2018/03/28/flutter/" class="has-link-black-ter is-size-6">Flutter 初识</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/flutter/">flutter</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/03/12/Jenkins/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Jenkins 2018">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-03-12T01:32:55.000Z">2018-03-12</time></div>
+                    <a href="/2018/03/12/Jenkins/" class="has-link-black-ter is-size-6">Jenkins 2018</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/02/20/YANXUAN/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="网易严选">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-02-20T06:46:49.000Z">2018-02-20</time></div>
+                    <a href="/2018/02/20/YANXUAN/" class="has-link-black-ter is-size-6">网易严选</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/模仿/">模仿</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/30/年末2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="年末2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-30T06:00:56.000Z">2017-12-30</time></div>
+                    <a href="/2017/12/30/年末2017/" class="has-link-black-ter is-size-6">年末2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/生活/">生活</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/flutter/">
+                        <span class="level-start">
+                            <span class="level-item">flutter</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工作/">
+                        <span class="level-start">
+                            <span class="level-item">工作</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/工具/">
+                        <span class="level-start">
+                            <span class="level-item">工具</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/总结/">
+                        <span class="level-start">
+                            <span class="level-item">总结</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/效率/">
+                        <span class="level-start">
+                            <span class="level-item">效率</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/模仿/">
+                        <span class="level-start">
+                            <span class="level-item">模仿</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/网易/">
+                        <span class="level-start">
+                            <span class="level-item">网易</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/跨平台/">
+                        <span class="level-start">
+                            <span class="level-item">跨平台</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 luo&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                if (typeof($.fn.lightGallery) === 'function') {
+                    $('.article').lightGallery({ selector: '.gallery-item' });
+                }
+                if (typeof($.fn.justifiedGallery) === 'function') {
+                    $('.justified-gallery').justifiedGallery();
+                }
+            });
+        })(jQuery);
+    </script>
+    
+
+    
+    
+    
+    <div id="outdated">
+        <h6>Your browser is out-of-date!</h6>
+        <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+        <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // plugin function, place inside DOM ready function
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'flex'
+            })
+        });
+    </script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/animejs@2.2.0/anime.js"></script>
+    <script>
+    function isIE() {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf('MSIE ');
+        var trident = ua.indexOf('Trident/');
+        return (msie > 0 || trident > 0);
+    }
+
+    $(document).ready(function () {
+        $('body>.navbar,body>.section,body>.footer').css('opacity', 1);
+        if (!isIE()) {
+            ['.column-main > .card',
+             '.column-left > .card',
+             '.column-right > .card'].map(function(target) {
+                anime({
+                    targets: target,
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 300,
+                    easing: 'easeOutSine',
+                    delay: function(el, i, l) {
+                        return i * 100;
+                    }
+                })
+            });
+
+            anime({
+                targets: '.navbar-main',
+                translateY: [-100, 0],
+                opacity: [0, 1],
+                duration: 300,
+                easing: 'easeOutSine'
+            });
+        }
+    });
+    </script>
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<style>
+#back-to-top {
+    position: fixed;
+    padding: 8px 0;
+    transition: 0.4s ease opacity, 0.4s ease width, 0.4s ease transform, 0.4s ease border-radius;
+    opacity: 0;
+    line-height: 24px;
+    outline: none;
+    transform: translateY(120px);
+}
+#back-to-top.fade-in {
+    opacity: 1;
+}
+#back-to-top.rise-up {
+    transform: translateY(0);
+}
+</style>
+<script src="/js/back-to-top.js"></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
