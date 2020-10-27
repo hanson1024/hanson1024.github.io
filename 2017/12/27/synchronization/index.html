@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://r.photo.store.qq.com/psc?/V12iUFxG1GOso0/45NBuzDIW489QBoVep5mcbtbMBEdEi41c8x47Qnpth*pXbK3EaXZxBB3Qm1o22JWm6Xex6sY3Nd4JDRJQaWefLFalYVCDEzV5qvIBLRVIHI!/r">
 <meta property="og:image" content="http://r.photo.store.qq.com/psc?/V12iUFxG1GOso0/45NBuzDIW489QBoVep5mcbtbMBEdEi41c8x47Qnpth.oOyCkLycLr3mLW2ase4ETPt9xDKYYNKFPXpehZaV3qS1BZPD*20CcbXjXNUFa614!/r">
 <meta property="og:image" content="http://r.photo.store.qq.com/psc?/V12iUFxG1GOso0/45NBuzDIW489QBoVep5mcbtbMBEdEi41c8x47Qnpth*pZ1VUDRh5gJ46jbtVfVoJ7jtwhu9SOEADPWpanalssBwqmmFIua4Pts7IXpCg2sY!/r">
-<meta property="og:updated_time" content="2020-10-27T05:48:43.580Z">
+<meta property="og:updated_time" content="2020-10-27T05:56:18.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Synchronization">
 <meta name="twitter:description" content="应用程序中多线程的存在，带来了有关多个执行线程安全访问资源的潜在问题。两个线程修改同一资源可能会以非预期的方式相互干扰。例如，一个线程可能会覆盖另一个线程的修改，或者使应用程序进入一个未知的、潜在的无效状态。如果你很幸运，被破坏的资源可能会导致明显的性能问题或崩溃，而这些问题相对容易跟踪和修复。然而，如果你不幸运，损坏可能会导致微妙的错误，直到很久以后才会表现出来，或者这些错误可能需要对你的底层编">
@@ -136,8 +136,8 @@
     
             <div class="post-content">
             <p>应用程序中多线程的存在，带来了有关多个执行线程安全访问资源的潜在问题。两个线程修改同一资源可能会以非预期的方式相互干扰。例如，一个线程可能会覆盖另一个线程的修改，或者使应用程序进入一个未知的、潜在的无效状态。如果你很幸运，被破坏的资源可能会导致明显的性能问题或崩溃，而这些问题相对容易跟踪和修复。然而，如果你不幸运，损坏可能会导致微妙的错误，直到很久以后才会表现出来，或者这些错误可能需要对你的底层编码假设进行重大的整改。</p>
-<p>当涉及到线程安全时，一个好的设计是你最好的保护。避免共享资源，尽量减少你的线程之间的交互，使得这些线程相互干扰的可能性降低。然而，完全无干扰的设计并不总是可能的。在你的线程必须交互的情况下，你需要使用同步工具来确保当它们交互时，能够安全地进行。</p>
 <a id="more"></a>
+<p>当涉及到线程安全时，一个好的设计是你最好的保护。避免共享资源，尽量减少你的线程之间的交互，使得这些线程相互干扰的可能性降低。然而，完全无干扰的设计并不总是可能的。在你的线程必须交互的情况下，你需要使用同步工具来确保当它们交互时，能够安全地进行。</p>
 <p>OSX和iOS提供了许多同步工具供你使用，从提供互斥访问的工具到在你的应用程序中正确排序事件的工具不一而足。下面的章节描述了这些工具，以及您如何在代码中使用它们来影响对程序资源的安全访问。</p>
 <h2 id="Synchronization-Tools"><a href="#Synchronization-Tools" class="headerlink" title="Synchronization Tools"></a><strong>Synchronization Tools</strong></h2><p>为了防止不同的线程意外地改变数据，你可以将你的应用程序设计成不存在同步问题，或者你可以使用同步工具。虽然完全避免同步问题是可取的，但并不总是可能的。下面的章节描述了可供您使用的同步工具的基本类别。</p>
 <h3 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h3><p>原子操作是一种简单的同步形式，工作在简单的数据类型上。原子操作的优点是不会阻塞竞争的线程。对于简单的操作，例如增量一个计数器变量，这可以带来比带锁好得多的性能。</p>
