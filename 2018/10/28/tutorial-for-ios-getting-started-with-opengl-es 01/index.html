@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="OpenGL ES2.0 – iphone开发指引 上"/>
+
+
+
+
+  <meta name="keywords" content="OpenGL ES," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sqjuanke">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/10/28/tutorial-for-ios-getting-started-with-opengl-es 01/"/>
+
+
+<meta name="description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta name="keywords" content="OpenGL ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL ES2.0 – iphone开发指引 上">
+<meta property="og:url" content="http://yoursite.com/2018/10/28/tutorial-for-ios-getting-started-with-opengl-es 01/index.html">
+<meta property="og:site_name" content="sqjuanke">
+<meta property="og:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815453110.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815461855.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815485029.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815495138.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815590542.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816012443.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816061947.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816112431.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816120726.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816172995.jpg?raw=true">
+<meta property="og:updated_time" content="2020-10-28T06:43:27.792Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL ES2.0 – iphone开发指引 上">
+<meta name="twitter:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta name="twitter:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815453110.jpg?raw=true">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> OpenGL ES2.0 – iphone开发指引 上 - sqjuanke </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">sqjuanke</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          OpenGL ES2.0 – iphone开发指引 上
+        
+      </h1>
+
+      <time class="post-time">
+          10月 28 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <blockquote>
+<p>OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验，创建类似hello world的APP。例如显示一些简单的立体图形。</p>
+</blockquote>
+<a id="more"></a>
+<p>流程大致如下：</p>
+<ul>
+<li><p>创建一个简单的OpenGL app</p>
+</li>
+<li><p>编译并运行 vertex &amp; fragment shaders</p>
+</li>
+<li><p>通过vertex buffer，在屏幕上渲染一个简单矩形</p>
+</li>
+<li><p>使用投影和 model-view 变形。</p>
+</li>
+<li><p>渲染一个可以 depth testing的3D对象。</p>
+</li>
+</ul>
+<p>说明：我并非OpenGL的专家，这些完全是通过自学得来的。如果大家发现哪些不对的地方，欢迎指出。</p>
+<h2 id="OpenGL-ES1-0-和-OpenGL-ES2-0"><a href="#OpenGL-ES1-0-和-OpenGL-ES2-0" class="headerlink" title="OpenGL ES1.0 和 OpenGL ES2.0"></a>OpenGL ES1.0 和 OpenGL ES2.0</h2><p>第一件你需要搞清楚的事，是OpenGL ES 1.0 和 2.0的区别。<br>他们有多不一样？我只能说他们很不一样。</p>
+<p>OpenGL ES1.0：</p>
+<p>针对固定管线硬件(fixed pipeline)，通过它内建的functions来设置诸如灯光 ，vertexes（图形的顶点数），颜色、camera等等的东西。</p>
+<p>OpenGL ES2.0：</p>
+<p>针对可编程管线硬件(programmable pipeline)，基于这个设计可以让内建函数见鬼去吧，但同时，你得自己动手编写任何功能。</p>
+<p>“TMD”，你可能会这么想。这样子我还可能想用2.0么？</p>
+<p>但2.0确实能做一些很cool而1.0不能做的事情，譬如：toon shader（贴材质）.</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815453110.jpg?raw=true" alt=""></p>
+<p>利用opengles2.0，甚至还能创建下面的这种很酷的灯光和阴影效果：</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815461855.jpg?raw=true" alt=""></p>
+<p>OpenGL ES2.0只能够在iphone 3GS+、iPod Touch 3G+ 和所有版本的ipad上运行。庆幸现在大多数用户都在这个范围。
+　　</p>
+<h2 id="一、开始吧"><a href="#一、开始吧" class="headerlink" title="一、开始吧"></a>一、开始吧</h2><p>尽管Xcode自带了OpenGL ES的项目模板，但这个模板自行创建了大量的代码，这样会让初学者感到迷惘。因此我们通过自行编写的方式来进行，通过一步一步编写，你能更清楚它的工作机制。</p>
+<p>启动Xcode，新建项目-选择Window-based Application, 让我们从零开始。点击下一步，把这个项目命名为HelloOpenGL，点击下一步，选择存放目录，点击“创建”。CMD+R，build and run。你会看到一个空白的屏幕。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815485029.jpg?raw=true" alt=""></p>
+<p>如你所见的，Window-based 模板创建了一个没有view、没有view controller或者其它东西的项目。它只包含了一个必须的UIWindow。</p>
+<ul>
+<li><p>File/New File,新建文件：选择iOS\Cocoa Touch\Objective-c Class, 点击下一步。</p>
+</li>
+<li><p>选择subclass UIView，点击下一步，命名为 OpenGLView.m., 点击保存。</p>
+</li>
+</ul>
+<p>接下来，你要在这个OpenGLView.m 文件下加入很多代码。</p>
+<h3 id="1）-添加必须的framework-（框架）"><a href="#1）-添加必须的framework-（框架）" class="headerlink" title="1）  添加必须的framework （框架）"></a>1）  添加必须的framework （框架）</h3><p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815495138.jpg?raw=true" alt=""></p>
+<p>加入：OpenGLES.frameworks 和 QuartzCore.framework</p>
+<ul>
+<li><p>在项目的Groups&amp;Files 目录下，选择target “HelloOpenGL”，展开Link Binary with Libraries部分。这里是项目用到的框架。</p>
+</li>
+<li><p>“+”添加，选择OpenGLES.framework, 重复一次把QuartzCore.framework也添加进来。</p>
+</li>
+</ul>
+<h3 id="2）修改OpenGLView-h"><a href="#2）修改OpenGLView-h" class="headerlink" title="2）修改OpenGLView.h"></a>2）修改OpenGLView.h</h3><p>如下：引入OpenGL的Header，创建一些后面会用到的实例变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">#import &lt;QuartzCore/QuartzCore.h&gt;</span><br><span class="line">#include &lt;OpenGLES/ES2/gl.h&gt;</span><br><span class="line">#include &lt;OpenGLES/ES2/glext.h&gt;</span><br><span class="line"> </span><br><span class="line">@interface OpenGLView : UIView &#123;</span><br><span class="line">    CAEAGLLayer* _eaglLayer;</span><br><span class="line">    EAGLContext* _context;</span><br><span class="line">    GLuint _colorRenderBuffer;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h3 id="3）设置layer-class-为-CAEAGLLayer"><a href="#3）设置layer-class-为-CAEAGLLayer" class="headerlink" title="3）设置layer class 为 CAEAGLLayer"></a>3）设置layer class 为 CAEAGLLayer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (Class)layerClass &#123;</span><br><span class="line">    return [CAEAGLLayer class];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>想要显示OpenGL的内容，你需要把它缺省的layer设置为一个特殊的layer。（CAEAGLLayer）。这里通过直接复写layerClass的方法。</p>
+<h3 id="4-设置layer为不透明（Opaque）"><a href="#4-设置layer为不透明（Opaque）" class="headerlink" title="4) 设置layer为不透明（Opaque）"></a>4) 设置layer为不透明（Opaque）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupLayer &#123;</span><br><span class="line">    _eaglLayer = (CAEAGLLayer*) self.layer;</span><br><span class="line">    _eaglLayer.opaque = YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为缺省的话，CALayer是透明的。而透明的层对性能负荷很大，特别是OpenGL的层。</p>
+<p>（如果可能，尽量都把层设置为不透明。另一个比较明显的例子是自定义tableview cell）</p>
+<h3 id="5）创建OpenGL-context"><a href="#5）创建OpenGL-context" class="headerlink" title="5）创建OpenGL context"></a>5）创建OpenGL context</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupContext &#123;   </span><br><span class="line">    EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;</span><br><span class="line">    _context = [[EAGLContext alloc] initWithAPI:api];</span><br><span class="line">    if (!_context) &#123;</span><br><span class="line">        NSLog(@&quot;Failed to initialize OpenGLES 2.0 context&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    if (![EAGLContext setCurrentContext:_context]) &#123;</span><br><span class="line">        NSLog(@&quot;Failed to set current OpenGL context&quot;);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无论你要OpenGL帮你实现什么，总需要这个 EAGLContext。EAGLContext管理所有通过OpenGL进行draw的信息。这个与Core Graphics context类似。当你创建一个context，你要声明你要用哪个version的API。这里，我们选择OpenGL ES 2.0.</p>
+<p>（容错处理，如果创建失败了，我们的程序会退出）</p>
+<h3 id="6）创建render-buffer-（渲染缓冲区）"><a href="#6）创建render-buffer-（渲染缓冲区）" class="headerlink" title="6）创建render buffer （渲染缓冲区）"></a>6）创建render buffer （渲染缓冲区）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupRenderBuffer &#123;</span><br><span class="line">    glGenRenderbuffers(1, &amp;_colorRenderBuffer);</span><br><span class="line">    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);        </span><br><span class="line">    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Render buffer 是OpenGL的一个对象，用于存放渲染过的图像。有时候你会发现render buffer会作为一个color buffer被引用，因为本质上它就是存放用于显示的颜色。</p>
+<p>创建render buffer的三步：</p>
+<ol>
+<li>调用glGenRenderbuffers来创建一个新的render buffer object。这里返回一个唯一的integer来标记render buffer（这里把这个唯一值赋值到_colorRenderBuffer）。有时候你会发现这个唯一值被用来作为程序内的一个OpenGL 的名称。（反正它唯一嘛）</li>
+<li>调用glBindRenderbuffer ，告诉这个OpenGL：我在后面引用GL_RENDERBUFFER的地方，其实是想用_colorRenderBuffer。其实就是告诉OpenGL，我们定义的buffer对象是属于哪一种OpenGL对象</li>
+<li>最后，为render buffer分配空间。renderbufferStorage</li>
+</ol>
+<h3 id="7）创建一个-frame-buffer-（帧缓冲区）"><a href="#7）创建一个-frame-buffer-（帧缓冲区）" class="headerlink" title="7）创建一个 frame buffer （帧缓冲区）"></a>7）创建一个 frame buffer （帧缓冲区）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupFrameBuffer &#123;    </span><br><span class="line">    GLuint framebuffer;</span><br><span class="line">    glGenFramebuffers(1, &amp;framebuffer);</span><br><span class="line">    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);</span><br><span class="line">    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, </span><br><span class="line">        GL_RENDERBUFFER, _colorRenderBuffer);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>Frame buffer也是OpenGL的对象，它包含了前面提到的render buffer，以及其它后面会讲到的诸如：depth buffer、stencil buffer 和 accumulation buffer。前两步创建frame buffer的动作跟创建render buffer的动作很类似。（反正也是用一个glBind什么的）而最后一步  glFramebufferRenderbuffer 这个才有点新意。它让你把前面创建的buffer render依附在frame buffer的GL_COLOR_ATTACHMENT0位置上。</p>
+<h3 id="8）清理屏幕"><a href="#8）清理屏幕" class="headerlink" title="8）清理屏幕"></a>8）清理屏幕</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)render &#123;</span><br><span class="line">    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">    [_context presentRenderbuffer:GL_RENDERBUFFER];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了尽快在屏幕上显示一些什么，在我们和那些 vertexes、shaders打交道之前，把屏幕清理一下，显示另一个颜色吧。（RGB 0, 104, 55，绿色吧）</p>
+<p>这里每个RGB色的范围是0~1，所以每个要除一下255.</p>
+<p>下面解析一下每一步动作：</p>
+<ol>
+<li>调用glClearColor ，设置一个RGB颜色和透明度，接下来会用这个颜色涂满全屏。</li>
+<li>调用glClear来进行这个“填色”的动作（大概就是photoshop那个油桶嘛）。还记得前面说过有很多buffer的话，这里我们要用到GL_COLOR_BUFFER_BIT来声明要清理哪一个缓冲区。</li>
+<li>调用OpenGL context的presentRenderbuffer方法，把缓冲区（render buffer和color buffer）的颜色呈现到UIView上。</li>
+</ol>
+<h3 id="9）把前面的动作串起来修改一下OpenGLView-m"><a href="#9）把前面的动作串起来修改一下OpenGLView-m" class="headerlink" title="9）把前面的动作串起来修改一下OpenGLView.m"></a>9）把前面的动作串起来修改一下OpenGLView.m</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// Replace initWithFrame with this</span><br><span class="line">- (id)initWithFrame:(CGRect)frame</span><br><span class="line">&#123;</span><br><span class="line">    self = [super initWithFrame:frame];</span><br><span class="line">    if (self) &#123;        </span><br><span class="line">        [self setupLayer];        </span><br><span class="line">        [self setupContext];                </span><br><span class="line">        [self setupRenderBuffer];        </span><br><span class="line">        [self setupFrameBuffer];                </span><br><span class="line">        [self render];        </span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Replace dealloc method with this</span><br><span class="line">- (void)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    [_context release];</span><br><span class="line">    _context = nil;</span><br><span class="line">    [super dealloc];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10）把App-Delegate和OpenGLView-连接起来"><a href="#10）把App-Delegate和OpenGLView-连接起来" class="headerlink" title="10）把App Delegate和OpenGLView 连接起来"></a>10）把App Delegate和OpenGLView 连接起来</h3><p>在HelloOpenGLAppDelegate.h 中修改一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// At top of file</span><br><span class="line">#import &quot;OpenGLView.h&quot;</span><br><span class="line"> </span><br><span class="line">// Inside @interface</span><br><span class="line">OpenGLView* _glView;</span><br><span class="line"> </span><br><span class="line">// After @interface</span><br><span class="line">@property (nonatomic, retain) IBOutlet OpenGLView *glView;</span><br></pre></td></tr></table></figure>
+<p>接下来修改.m文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// At top of file</span><br><span class="line">@synthesize glView=_glView;</span><br><span class="line"> </span><br><span class="line">// At top of application:didFinishLaunchingWithOptions</span><br><span class="line">CGRect screenBounds = [[UIScreen mainScreen] bounds];    </span><br><span class="line">self.glView = [[[OpenGLView alloc] initWithFrame:screenBounds] autorelease];</span><br><span class="line">[self.window addSubview:_glView];</span><br><span class="line"> </span><br><span class="line">// In dealloc</span><br><span class="line">[_glView release];</span><br></pre></td></tr></table></figure>
+<p>一切顺利的话，你就能看到一个新的view在屏幕上显示，这里是OpenGL的世界。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815590542.jpg?raw=true" alt=""></p>
+<h2 id="二、添加shaders：顶点着色器和片段着色器"><a href="#二、添加shaders：顶点着色器和片段着色器" class="headerlink" title="二、添加shaders：顶点着色器和片段着色器"></a>二、添加shaders：顶点着色器和片段着色器</h2><p>在OpenGL ES2.0 的世界，在场景中渲染任何一种几何图形，你都需要创建两个称之为“着色器”的小程序。</p>
+<p>着色器由一个类似C的语言编写- GLSL。知道就好了，我们不深究。</p>
+<p>这个世界有两种着色器（Shader）：</p>
+<ul>
+<li><p>Vertex shaders – 在你的场景中，每个顶点都需要调用的程序，称为“顶点着色器”。假如你在渲染一个简单的场景：一个长方形，每个角只有一个顶点。于是vertex shader 会被调用四次。它负责执行：诸如灯光、几何变换等等的计算。得出最终的顶点位置后，为下面的片段着色器提供必须的数据。</p>
+</li>
+<li><p>Fragment shaders – 在你的场景中，大概每个像素都会调用的程序，称为“片段着色器”。在一个简单的场景，也是刚刚说到的长方形。这个长方形所覆盖到的每一个像素，都会调用一次fragment shader。片段着色器的责任是计算灯光，以及更重要的是计算出每个像素的最终颜色。</p>
+</li>
+</ul>
+<p>下面我们通过简单的例子来说明。</p>
+<p>打开你的xcode，File\New\New File… 选择iOS\Other\Empty, 点击下一步。命名为：SimpleVertex.glsl 点击保存。打开这个文件，加入下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">attribute vec4 Position; // 1</span><br><span class="line">attribute vec4 SourceColor; // 2</span><br><span class="line"> </span><br><span class="line">varying vec4 DestinationColor; // 3</span><br><span class="line"> </span><br><span class="line">void main(void) &#123; // 4</span><br><span class="line">   DestinationColor = SourceColor; // 5</span><br><span class="line">   gl_Position = Position; // 6</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们一行一行解析：</p>
+<ol>
+<li><p>“attribute”声明了这个shader会接受一个传入变量，这个变量名为“Position”。在后面的代码中，你会用它来传入顶点的位置数据。这个变量的类型是“vec4”,表示这是一个由4部分组成的矢量。</p>
+</li>
+<li><p>与上面同理，这里是传入顶点的颜色变量。</p>
+</li>
+<li><p>这个变量没有“attribute”的关键字。表明它是一个传出变量，它就是会传入片段着色器的参数。“varying”关键字表示，依据顶点的颜色，平滑计算出顶点之间每个像素的颜色。</p>
+<p>文字比较难懂，我们一图胜千言：<br>图中的一个像素，它位于红色和绿色的顶点之间，准确地说，这是一个距离上面顶点55/100，距离下面顶点45/100的点。所以通过过渡，能确定这个像素的颜色。<br><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816012443.jpg?raw=true" alt=""></p>
+</li>
+<li><p>每个shader都从main开始– 跟C一样嘛。</p>
+</li>
+<li><p>设置目标颜色 = 传入变量：SourceColor</p>
+</li>
+<li><p>gl_Position 是一个内建的传出变量。这是一个在 vertex shader中必须设置的变量。这里我们直接把gl_Position = Position; 没有做任何逻辑运算。</p>
+</li>
+</ol>
+<p>一个简单的vertex shader 就是这样了，接下来我们再创建一个简单的fragment shader。</p>
+<p>新建一个空白文件：</p>
+<ul>
+<li><p>File\New\New File… 选择iOS\Other\Empty</p>
+</li>
+<li><p>命名为：SimpleFragment.glsl 保存。</p>
+</li>
+</ul>
+<p>打开这个文件，加入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">varying lowp vec4 DestinationColor; // 1</span><br><span class="line"> </span><br><span class="line">void main(void) &#123; // 2</span><br><span class="line">    gl_FragColor = DestinationColor; // 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面解析：</p>
+<ol>
+<li>这是从vertex shader中传入的变量，这里和vertex shader定义的一致。而额外加了一个关键字：lowp。在fragment shader中，必须给出一个计算的精度。出于性能考虑，总使用最低精度是一个好习惯。这里就是设置成最低的精度。如果你需要，也可以设置成medp或者highp.</li>
+<li>也是从main开始嘛</li>
+<li>正如你在vertex shader中必须设置gl_Position, 在fragment shader中必须设置gl_FragColor.</li>
+</ol>
+<p>这里也是直接从 vertex shader中取值，先不做任何改变，还可以吧？接下来我们开始运用这些shader来创建我们的app。</p>
+<h3 id="1）编译-Vertex-shader-和-Fragment-shader"><a href="#1）编译-Vertex-shader-和-Fragment-shader" class="headerlink" title="1）编译 Vertex shader 和 Fragment shader"></a>1）编译 Vertex shader 和 Fragment shader</h3><p>目前为止，xcode仅仅会把这两个文件copy到application bundle中。我们还需要在运行时编译和运行这些shader。你可能会感到诧异。为什么要在app运行时编译代码？这样做的好处是，我们的着色器不用依赖于某种图形芯片。（这样才可以跨平台嘛）</p>
+<p>下面开始加入动态编译的代码，打开OpenGLView.m，在initWithFrame: 方法上方加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType &#123;</span><br><span class="line"> </span><br><span class="line">    // 1</span><br><span class="line">    NSString* shaderPath = [[NSBundle mainBundle] pathForResource:shaderName </span><br><span class="line">        ofType:@&quot;glsl&quot;];</span><br><span class="line">    NSError* error;</span><br><span class="line">    NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath </span><br><span class="line">        encoding:NSUTF8StringEncoding error:&amp;error];</span><br><span class="line">    if (!shaderString) &#123;</span><br><span class="line">        NSLog(@&quot;Error loading shader: %@&quot;, error.localizedDescription);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 2</span><br><span class="line">    GLuint shaderHandle = glCreateShader(shaderType);    </span><br><span class="line"> </span><br><span class="line">    // 3</span><br><span class="line">constchar* shaderStringUTF8 = [shaderString UTF8String];    </span><br><span class="line">    int shaderStringLength = [shaderString length];</span><br><span class="line">    glShaderSource(shaderHandle, 1, &amp;shaderStringUTF8, &amp;shaderStringLength);</span><br><span class="line"> </span><br><span class="line">    // 4</span><br><span class="line">    glCompileShader(shaderHandle);</span><br><span class="line"> </span><br><span class="line">    // 5</span><br><span class="line">    GLint compileSuccess;</span><br><span class="line">    glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &amp;compileSuccess);</span><br><span class="line">    if (compileSuccess == GL_FALSE) &#123;</span><br><span class="line">        GLchar messages[256];</span><br><span class="line">        glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &amp;messages[0]);</span><br><span class="line">        NSString *messageString = [NSString stringWithUTF8String:messages];</span><br><span class="line">        NSLog(@&quot;%@&quot;, messageString);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    return shaderHandle;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面解析：</p>
+<ol>
+<li>这是一个UIKit编程的标准用法，就是在NSBundle中查找某个文件。大家应该熟悉了吧。</li>
+<li>调用 glCreateShader来创建一个代表shader 的OpenGL对象。这时你必须告诉OpenGL，你想创建 fragment shader还是vertex shader。所以便有了这个参数：shaderType</li>
+<li>调用glShaderSource ，让OpenGL获取到这个shader的源代码。（就是我们写的那个）这里我们还把NSString转换成C-string</li>
+<li>最后，调用glCompileShader 在运行时编译shader</li>
+<li>大家都是程序员，有程序的地方就会有fail。有程序员的地方必然会有debug。如果编译失败了，我们必须一些信息来找出问题原因。 glGetShaderiv 和 glGetShaderInfoLog  会把error信息输出到屏幕。（然后退出）</li>
+</ol>
+<p>我们还需要一些步骤来编译vertex shader 和frament shader。</p>
+<ul>
+<li>把它们俩关联起来</li>
+<li>告诉OpenGL来调用这个程序，还需要一些指针什么的。</li>
+</ul>
+<p>在compileShader: 方法下方，加入这些代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">- (void)compileShaders &#123;</span><br><span class="line"> </span><br><span class="line">    // 1</span><br><span class="line">    GLuint vertexShader = [self compileShader:@&quot;SimpleVertex&quot; </span><br><span class="line">        withType:GL_VERTEX_SHADER];</span><br><span class="line">    GLuint fragmentShader = [self compileShader:@&quot;SimpleFragment&quot; </span><br><span class="line">        withType:GL_FRAGMENT_SHADER];</span><br><span class="line"> </span><br><span class="line">    // 2</span><br><span class="line">    GLuint programHandle = glCreateProgram();</span><br><span class="line">    glAttachShader(programHandle, vertexShader);</span><br><span class="line">    glAttachShader(programHandle, fragmentShader);</span><br><span class="line">    glLinkProgram(programHandle);</span><br><span class="line"> </span><br><span class="line">    // 3</span><br><span class="line">    GLint linkSuccess;</span><br><span class="line">    glGetProgramiv(programHandle, GL_LINK_STATUS, &amp;linkSuccess);</span><br><span class="line">    if (linkSuccess == GL_FALSE) &#123;</span><br><span class="line">        GLchar messages[256];</span><br><span class="line">        glGetProgramInfoLog(programHandle, sizeof(messages), 0, &amp;messages[0]);</span><br><span class="line">        NSString *messageString = [NSString stringWithUTF8String:messages];</span><br><span class="line">        NSLog(@&quot;%@&quot;, messageString);</span><br><span class="line">        exit(1);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 4</span><br><span class="line">    glUseProgram(programHandle);</span><br><span class="line"> </span><br><span class="line">    // 5</span><br><span class="line">    _positionSlot = glGetAttribLocation(programHandle, &quot;Position&quot;);</span><br><span class="line">    _colorSlot = glGetAttribLocation(programHandle, &quot;SourceColor&quot;);</span><br><span class="line">    glEnableVertexAttribArray(_positionSlot);</span><br><span class="line">    glEnableVertexAttribArray(_colorSlot);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是解析：</p>
+<ol>
+<li>用来调用你刚刚写的动态编译方法，分别编译了vertex shader 和 fragment shader</li>
+<li>调用了glCreateProgram glAttachShader  glLinkProgram 连接 vertex 和 fragment shader成一个完整的program。</li>
+<li>调用 glGetProgramiv  lglGetProgramInfoLog 来检查是否有error，并输出信息。</li>
+<li>调用 glUseProgram  让OpenGL真正执行你的program</li>
+<li>最后，调用 glGetAttribLocation 来获取指向 vertex shader传入变量的指针。以后就可以通过这写指针来使用了。还有调用 glEnableVertexAttribArray来启用这些数据。（因为默认是 disabled的。）</li>
+</ol>
+<p>最后还有两步：</p>
+<ul>
+<li>在@interface in OpenGLView.h 中添加两个变量：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLuint _positionSlot;</span><br><span class="line">GLuint _colorSlot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 initWithFrame方法里，在调用render之前要加入这个：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self compileShaders];</span><br></pre></td></tr></table></figure>
+<p>编译！运行！</p>
+<p>如果你仍能正常地看到之前那个绿色的屏幕，就证明你前面写的代码都很好地工作了。</p>
+<h2 id="三、为这个简单的长方形创建-Vertex-Data！"><a href="#三、为这个简单的长方形创建-Vertex-Data！" class="headerlink" title="三、为这个简单的长方形创建 Vertex Data！"></a>三、为这个简单的长方形创建 Vertex Data！</h2><p>在这里，我们打算在屏幕上渲染一个正方形，如下图：</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816061947.jpg?raw=true" alt=""></p>
+<p>在你用OpenGL渲染图形的时候，时刻要记住一点，你只能直接渲染三角形，而不是其它诸如矩形的图形。所以，一个正方形需要分开成两个三角形来渲染。</p>
+<p>图中分别是顶点（0,1,2）和顶点（0,2,3）构成的三角形。</p>
+<p>OpenGL ES2.0的一个好处是，你可以按你的风格来管理顶点。</p>
+<h3 id="1）矩形信息"><a href="#1）矩形信息" class="headerlink" title="1）矩形信息"></a>1）矩形信息</h3><p>打开OpenGLView.m文件，创建一个纯粹的C结构以及一些array来跟踪我们的矩形信息，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    float Position[3];</span><br><span class="line">    float Color[4];</span><br><span class="line">&#125; Vertex;</span><br><span class="line"> </span><br><span class="line">const Vertex Vertices[] = &#123;</span><br><span class="line">    &#123;&#123;1, -1, 0&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, 1, 0&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, 1, 0&#125;, &#123;0, 0, 1, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, -1, 0&#125;, &#123;0, 0, 0, 1&#125;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">const GLubyte Indices[] = &#123;</span><br><span class="line">     0, 1, 2,</span><br><span class="line">     2, 3, 0</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这段代码的作用是：</p>
+<ol>
+<li>一个用于跟踪所有顶点信息的结构Vertex （目前只包含位置和颜色。）</li>
+<li>定义了以上面这个Vertex结构为类型的array。</li>
+<li>一个用于表示三角形顶点的数组。</li>
+</ol>
+<p>数据准备好了，我们来开始把数据传入OpenGL</p>
+<h3 id="2）创建Vertex-Buffer-对象"><a href="#2）创建Vertex-Buffer-对象" class="headerlink" title="2）创建Vertex Buffer 对象"></a>2）创建Vertex Buffer 对象</h3><p>传数据到OpenGL的话，最好的方式就是用Vertex Buffer对象。</p>
+<p>基本上，它们就是用于缓存顶点数据的OpenGL对象。通过调用一些function来把数据发送到OpenGL-land。（是指OpenGL的画面？）</p>
+<p>这里有两种顶点缓存类型– 一种是用于跟踪每个顶点信息的（正如我们的Vertices array），另一种是用于跟踪组成每个三角形的索引信息（我们的Indices array）。</p>
+<p>下面我们在initWithFrame中，加入一些代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self setupVBOs];</span><br></pre></td></tr></table></figure>
+<p>下面是定义这个setupVBOs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)setupVBOs &#123;</span><br><span class="line"> </span><br><span class="line">    GLuint vertexBuffer;</span><br><span class="line">    glGenBuffers(1, &amp;vertexBuffer);</span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);</span><br><span class="line"> </span><br><span class="line">    GLuint indexBuffer;</span><br><span class="line">    glGenBuffers(1, &amp;indexBuffer);</span><br><span class="line">    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);</span><br><span class="line">    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如你所见，其实很简单的。这其实是一种之前也用过的模式（pattern）。</p>
+<ul>
+<li><p>glGenBuffs - 创建一个Vertex Buffer 对象</p>
+</li>
+<li><p>glBindBur – 告诉OpenGL我们的vertexBuffer 是指GL_ARRAY_BUFFER</p>
+</li>
+<li><p>glBufferData – 把数据传到OpenGL-land</p>
+</li>
+</ul>
+<p>想起哪里用过这个模式吗？要不再回去看看frame buffer那一段？ </p>
+<p>万事俱备，我们可以通过新的shader，用新的渲染方法来把顶点数据画到屏幕上。</p>
+<p>用这段代码替换掉之前的render：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (void)render &#123;</span><br><span class="line">    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"> </span><br><span class="line">    // 1</span><br><span class="line">    glViewport(0, 0, self.frame.size.width, self.frame.size.height);</span><br><span class="line"> </span><br><span class="line">    // 2</span><br><span class="line">    glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, </span><br><span class="line">        sizeof(Vertex), 0);</span><br><span class="line">    glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, </span><br><span class="line">        sizeof(Vertex), (GLvoid*) (sizeof(float) *3));</span><br><span class="line"> </span><br><span class="line">    // 3</span><br><span class="line">    glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]), </span><br><span class="line">        GL_UNSIGNED_BYTE, 0);</span><br><span class="line"> </span><br><span class="line">    [_context presentRenderbuffer:GL_RENDERBUFFER];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1、调用glViewport 设置UIView中用于渲染的部分。这个例子中指定了整个屏幕。但如果你希望用更小的部分，你可以更变这些参数。</p>
+<p>2、调用glVertexAttribPointer来为vertex shader的两个输入参数配置两个合适的值。</p>
+<p>第二段这里，是一个很重要的方法，让我们来认真地看看它是如何工作的：</p>
+<ul>
+<li><p>第一个参数，声明这个属性的名称，之前我们称之为glGetAttribLocation</p>
+</li>
+<li><p>第二个参数，定义这个属性由多少个值组成。譬如说position是由3个float（x,y,z）组成，而颜色是4个float（r,g,b,a）</p>
+</li>
+<li>第三个，声明每一个值是什么类型。（这例子中无论是位置还是颜色，我们都用了GL_FLOAT）</li>
+<li>第四个，嗯……它总是false就好了。</li>
+<li>第五个，指 stride 的大小。这是一个种描述每个 vertex数据大小的方式。所以我们可以简单地传入 sizeof（Vertex），让编译器计算出来就好。</li>
+<li>最后一个，是这个数据结构的偏移量。表示在这个结构中，从哪里开始获取我们的值。Position的值在前面，所以传0进去就可以了。而颜色是紧接着位置的数据，而position的大小是3个float的大小，所以是从 3 * sizeof(float) 开始的。</li>
+</ul>
+<p>回来继续说代码，第三点：</p>
+<p>3、调用glDrawElements ，它最后会在每个vertex上调用我们的vertex shader，以及每个像素调用fragment shader，最终画出我们的矩形。</p>
+<p>它也是一个重要的方法，我们来仔细研究一下：</p>
+<ul>
+<li>第一个参数，声明用哪种特性来渲染图形。有GL_LINE_STRIP 和 GL_TRIANGLE_FAN。然而GL_TRIANGLE是最常用的，特别是与VBO 关联的时候。</li>
+<li>第二个，告诉渲染器有多少个图形要渲染。我们用到C的代码来计算出有多少个。这里是通过个 array的byte大小除以一个Indice类型的大小得到的。</li>
+<li>第三个，指每个indices中的index类型</li>
+<li>最后一个，在官方文档中说，它是一个指向index的指针。但在这里，我们用的是VBO，所以通过index的array就可以访问到了（在GL_ELEMENT_ARRAY_BUFFER传过了），所以这里不需要.</li>
+</ul>
+<p>编译运行的话，你就可以看到这个画面</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816112431.jpg?raw=true" alt=""></p>
+<p>你可能会疑惑，为什么这个长方形刚好占满整个屏幕。在缺省状态下，OpenGL的“camera”位于（0,0,0）位置，朝z轴的正方向。</p>
+<p>当然，后面我们会讲到projection（投影）以及如何控制camera。</p>
+<h3 id="3）增加一个投影"><a href="#3）增加一个投影" class="headerlink" title="3）增加一个投影"></a>3）增加一个投影</h3><p>为了在2D屏幕上显示3D画面，我们需要在图形上做一些投影变换，所谓投影就是下图这个意思：</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816120726.jpg?raw=true" alt=""></p>
+<p>基本上，为了模仿人类的眼球原理。我们设置一个远平面和一个近平面，在两个平面之前，离近平面近的图像，会因为被缩小了而显得变小；而离远平面近的图像，也会因此而变大。</p>
+<p>打开SimpleVertex.glsl，做一下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Add right before the main</span><br><span class="line">uniform mat4 Projection;</span><br><span class="line"> </span><br><span class="line">// Modify gl_Position line as follows</span><br><span class="line">gl_Position = Projection * Position;</span><br></pre></td></tr></table></figure>
+<p>这里我们增加了一个叫做projection的传入变量。uniform 关键字表示，这会是一个应用于所有顶点的常量，而不是会因为顶点不同而不同的值。</p>
+<p>mat4 是 4X4矩阵的意思。然而，Matrix math是一个很大的课题，我们不可能在这里解析。所以在这里，你只要认为它是用于放大缩小、旋转、变形就好了。</p>
+<p>Position位置乘以Projection矩阵，我们就得到最终的位置数值。</p>
+<p>无错，这就是一种被称之“线性代数”的东西。我在大学时期后，早就忘大部分了。</p>
+<p>其实数学也只是一种工具，而这种工具已经由前面的才子解决了，我们知道怎么用就好。</p>
+<p>Bill Hollings，cocos3d的作者。他编写了一个完整的3D特性框架，并整合到cocos2d中。（作者：可能有一天我也会弄一个3D的教程）无论任何，Cocos3d包含了Objective-C的向量和矩阵库，所以我们可以很好地应用到这个项目中。</p>
+<p>这里，<a href="https://github.com/sqjuanke/learnopengl/tree/master/resource/code/Cocos3DMathLib" target="_blank" rel="noopener">https://github.com/sqjuanke/learnopengl/tree/master/resource/code/Cocos3DMathLib</a></p>
+<p>（作者：我移除了一些不必要的依赖）下载并copy到你的项目中。记得选上：“Copy items into destination group’s folder (if needed)” 点击Finish。</p>
+<p>在OpenGLView.h 中加入一个实例变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLuint _projectionUniform;</span><br></pre></td></tr></table></figure>
+<p>然后到OpenGLView.m文件中加上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Add to top of file</span><br><span class="line">#import &quot;CC3GLMatrix.h&quot;</span><br><span class="line"> </span><br><span class="line">// Add to bottom of compileShaders</span><br><span class="line">_projectionUniform = glGetUniformLocation(programHandle, &quot;Projection&quot;);</span><br><span class="line"> </span><br><span class="line">// Add to render, right before the call to glViewport</span><br><span class="line">CC3GLMatrix *projection = [CC3GLMatrix matrix];</span><br><span class="line">float h =4.0f* self.frame.size.height / self.frame.size.width;</span><br><span class="line">[projection populateFromFrustumLeft:-2 andRight:2 andBottom:-h/2 andTop:h/2 andNear:4 andFar:10];</span><br><span class="line">glUniformMatrix4fv(_projectionUniform, 1, 0, projection.glMatrix);</span><br><span class="line"> </span><br><span class="line">// Modify vertices so they are within projection near/far planes</span><br><span class="line">const Vertex Vertices[] = &#123;</span><br><span class="line">    &#123;&#123;1, -1, -7&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, 1, -7&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, 1, -7&#125;, &#123;0, 0, 1, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, -1, -7&#125;, &#123;0, 0, 0, 1&#125;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过调用  glGetUniformLocation 来获取在vertex shader中的Projection输入变量</p>
+<p>然后，使用math library来创建投影矩阵。通过这个让你指定坐标，以及远近屏位置的方式，来创建矩阵，会让事情比较简单。</p>
+<p>你用来把数据传入到vertex shader的方式，叫做 glUniformMatrix4fv. 这个CC3GLMatrix类有一个很方便的方法 glMatrix,来把矩阵转换成OpenGL的array格式。</p>
+<p>最后，把之前的vertices数据修改一下，让z坐标为－７． </p>
+<p>编译后运行，你应该可以看到一个稍稍有点距离的正方形了。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816172995.jpg?raw=true" alt=""></p>
+<p>【引用】</p>
+<ul>
+<li><a href="https://www.cnblogs.com/zilongshanren/archive/2011/08/08/2131019.html" target="_blank" rel="noopener">https://www.cnblogs.com/zilongshanren/archive/2011/08/08/2131019.html</a></li>
+<li><a href="http://www.raywenderlich.com/3664/opengl-es-2-0-for-iphone-tutorial" target="_blank" rel="noopener">http://www.raywenderlich.com/3664/opengl-es-2-0-for-iphone-tutorial</a></li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/OpenGL-ES/">OpenGL ES</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/03/28/flutter/">
+        <span class="next-text nav-default">Flutter 初识</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2020
+    <span class="footer-author">luo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
