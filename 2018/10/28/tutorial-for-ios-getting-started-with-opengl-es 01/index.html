@@ -35,13 +35,13 @@
 <link rel="canonical" href="http://yoursite.com/2018/10/28/tutorial-for-ios-getting-started-with-opengl-es 01/"/>
 
 
-<meta name="description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta name="description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。  如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的">
 <meta name="keywords" content="OpenGL ES">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL ES2.0 – iphone开发指引 上">
 <meta property="og:url" content="http://yoursite.com/2018/10/28/tutorial-for-ios-getting-started-with-opengl-es 01/index.html">
 <meta property="og:site_name" content="sqjuanke">
-<meta property="og:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta property="og:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。  如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815453110.jpg?raw=true">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815461855.jpg?raw=true">
@@ -53,10 +53,10 @@
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816112431.jpg?raw=true">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816120726.jpg?raw=true">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816172995.jpg?raw=true">
-<meta property="og:updated_time" content="2020-10-28T06:43:27.792Z">
+<meta property="og:updated_time" content="2020-10-28T06:50:02.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL ES2.0 – iphone开发指引 上">
-<meta name="twitter:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验">
+<meta name="twitter:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。  如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的">
 <meta name="twitter:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080815453110.jpg?raw=true">
 
 
@@ -142,8 +142,9 @@
     
             <div class="post-content">
             <blockquote>
-<p>OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验，创建类似hello world的APP。例如显示一些简单的立体图形。</p>
+<p>OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。</p>
 </blockquote>
+<p>如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的实验，创建类似hello world的APP。例如显示一些简单的立体图形。</p>
 <a id="more"></a>
 <p>流程大致如下：</p>
 <ul>
