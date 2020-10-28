@@ -17,7 +17,7 @@
 
 
 
-  <meta name="keywords" content="OpenGL ES," />
+  <meta name="keywords" content="OpenGL ES,印象笔记," />
 
 
 
@@ -36,7 +36,7 @@
 
 
 <meta name="description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。  如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的">
-<meta name="keywords" content="OpenGL ES">
+<meta name="keywords" content="OpenGL ES,印象笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL ES2.0 – iphone开发指引 上">
 <meta property="og:url" content="http://yoursite.com/2018/10/28/tutorial-for-ios-getting-started-with-opengl-es 01/index.html">
@@ -53,7 +53,12 @@
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816112431.jpg?raw=true">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816120726.jpg?raw=true">
 <meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816172995.jpg?raw=true">
-<meta property="og:updated_time" content="2020-10-28T06:50:02.410Z">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816192747.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816205251.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816220098.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816282932.jpg?raw=true">
+<meta property="og:image" content="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816303365.jpg?raw=true">
+<meta property="og:updated_time" content="2020-10-28T07:35:23.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL ES2.0 – iphone开发指引 上">
 <meta name="twitter:description" content="OpenGL ES 是可以在iphone上实现2D和3D图形编程的低级API。  如果你之前接触过 cocos2d，sparrow，corona，unity 这些框架，你会发现其实它们都是基于OpenGL上创建的。多数程序员选择使用这些框架，而不是直接调用OpenGL，因为OpenGL实在是太难用了。而这篇教程，就是为了让大家更好地入门而写的。 在这个系列的文章中，你可以通过一些实用又容易上手的">
@@ -392,6 +397,59 @@
 <p>最后，把之前的vertices数据修改一下，让z坐标为－７． </p>
 <p>编译后运行，你应该可以看到一个稍稍有点距离的正方形了。</p>
 <p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816172995.jpg?raw=true" alt=""></p>
+<h2 id="尝试移动和旋转吧"><a href="#尝试移动和旋转吧" class="headerlink" title="尝试移动和旋转吧"></a>尝试移动和旋转吧</h2><p>如果总是要修改那个vertex array才能改变图形，这就太烦人了。而这正是变换矩阵该做的事（又来了，线性代数）</p>
+<p>在前面，我们修改了应用到投影矩阵的vertex array来达到移动图形的目的。何不试一下，做一个变形、放大缩小、旋转的矩阵来应用？我们称之为“model-view”变换。</p>
+<p>再回到 SimpleVertex.glsl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Add right after the Projection uniform</span><br><span class="line">uniform mat4 Modelview;</span><br><span class="line"> </span><br><span class="line">// Modify the gl_Position line</span><br><span class="line">gl_Position = Projection * Modelview * Position;</span><br></pre></td></tr></table></figure>
+<p>就是又加了一个 Uniform的矩阵而已。顺便把它应用到gl_Position当中。</p>
+<p>然后到 OpenGLView.h中加上一个变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLuint _modelViewUniform;</span><br></pre></td></tr></table></figure>
+<p>到OpenGLView.m中修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Add to end of compileShaders</span><br><span class="line">_modelViewUniform = glGetUniformLocation(programHandle, &quot;Modelview&quot;);</span><br><span class="line"> </span><br><span class="line">// Add to render, right before call to glViewport</span><br><span class="line">CC3GLMatrix *modelView = [CC3GLMatrix matrix];</span><br><span class="line">[modelView populateFromTranslation:CC3VectorMake(sin(CACurrentMediaTime()), 0, -7)];</span><br><span class="line">glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);</span><br><span class="line"> </span><br><span class="line">// Revert vertices back to z-value 0</span><br><span class="line">const Vertex Vertices[] = &#123;</span><br><span class="line">    &#123;&#123;1, -1, 0&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, 1, 0&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, 1, 0&#125;, &#123;0, 0, 1, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, -1, 0&#125;, &#123;0, 0, 0, 1&#125;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>获取那个model view uniform的传入变量</p>
+<p>使用cocos3d math库来创建一个新的矩阵，在变换中装入矩阵。</p>
+<p>变换是在z轴上移动-7，而为什么sin(当前时间) 呢？</p>
+<p>哈哈，如果你还记得高中时候的三角函数。sin()是一个从-1到1的函数。已PI（3.14）为一个周期。这样做的话，约每3.14秒，这个函数会从-1到1循环一次。</p>
+<p>把vertex 结构改回去，把z坐标设回0.</p>
+<p>编译运行，就算我们把z设回0，也可以看到这个位于中间的正方形了。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816192747.jpg?raw=true" alt=""></p>
+<p>什么？一动不动的？</p>
+<p>当然了，我们只是调用了一次render方法。</p>
+<p>接下来，我们在每一帧都调用一次看看。</p>
+<h3 id="渲染和-CADisplayLink"><a href="#渲染和-CADisplayLink" class="headerlink" title="渲染和 CADisplayLink"></a>渲染和 CADisplayLink</h3><p>理想状态下，我们希望OpenGL的渲染频率跟屏幕的刷新频率一致。</p>
+<p>幸运的是，Apple为我们提供了一个CADisplayLink的类。这个很好用的，马上就用吧。</p>
+<p>在OpenGLView.m文件，修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Add new method before init</span><br><span class="line">- (void)setupDisplayLink &#123;</span><br><span class="line">    CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];</span><br><span class="line">    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];    </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Modify render method to take a parameter</span><br><span class="line">- (void)render:(CADisplayLink*)displayLink &#123;</span><br><span class="line"> </span><br><span class="line">// Remove call to render in initWithFrame and replace it with the following</span><br><span class="line">[self setupDisplayLink];</span><br></pre></td></tr></table></figure>
+<p>这就行了，有CADisplayLink在每一帧都调用你的render方法，我们的图形看起身就好似被sin()周期地变型了。现在这个方块会前前后后地来回移动。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816205251.jpg?raw=true" alt=""></p>
+<h3 id="不费功夫地旋转"><a href="#不费功夫地旋转" class="headerlink" title="不费功夫地旋转"></a>不费功夫地旋转</h3><p>让图形旋转起来，才算得上有型。</p>
+<p>再到OpenGLView.h 中，添加成员变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float _currentRotation;</span><br></pre></td></tr></table></figure>
+<p>在OpenGLView.m的render中，在populateFromTranslation的调用后面加上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_currentRotation += displayLink.duration *90;</span><br><span class="line">[modelView rotateBy:CC3VectorMake(_currentRotation, _currentRotation, 0)];</span><br></pre></td></tr></table></figure>
+<p>添加了一个叫_currentRotation的float，每秒会增加90度。</p>
+<p>通过修改那个model view矩阵（这里相当于一个用于变型的矩阵），增加旋转。</p>
+<p>旋转在x、y轴上作用，没有在z轴的。</p>
+<p>编译运行，你会看到一个很有型的翻转的3D效果。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816220098.jpg?raw=true" alt=""></p>
+<h3 id="不费功夫地变成3D方块？"><a href="#不费功夫地变成3D方块？" class="headerlink" title="不费功夫地变成3D方块？"></a>不费功夫地变成3D方块？</h3><p>之前的只能算是2.5D,因为它还只是一个会旋转的面而已。现在我们把它改造成3D的。</p>
+<p>把之前的vertices、indices数组注释掉吧。</p>
+<p>然后加上新的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const Vertex Vertices[] = &#123;</span><br><span class="line">    &#123;&#123;1, -1, 0&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, 1, 0&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, 1, 0&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, -1, 0&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, -1, -1&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;1, 1, -1&#125;, &#123;1, 0, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, 1, -1&#125;, &#123;0, 1, 0, 1&#125;&#125;,</span><br><span class="line">    &#123;&#123;-1, -1, -1&#125;, &#123;0, 1, 0, 1&#125;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">const GLubyte Indices[] = &#123;</span><br><span class="line">    // Front</span><br><span class="line">0, 1, 2,</span><br><span class="line">    2, 3, 0,</span><br><span class="line">    // Back</span><br><span class="line">4, 6, 5,</span><br><span class="line">    4, 7, 6,</span><br><span class="line">    // Left</span><br><span class="line">2, 7, 3,</span><br><span class="line">    7, 6, 2,</span><br><span class="line">    // Right</span><br><span class="line">0, 4, 1,</span><br><span class="line">    4, 1, 5,</span><br><span class="line">    // Top</span><br><span class="line">6, 2, 1, </span><br><span class="line">    1, 6, 5,</span><br><span class="line">    // Bottom</span><br><span class="line">0, 3, 7,</span><br><span class="line">    0, 7, 4    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>编译运行，你会看到一个方块了。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816282932.jpg?raw=true" alt=""></p>
+<p>但这个方块有时候让人觉得假，因为你可以看到方块里面。</p>
+<p>这里还有一个叫做 depth testing（深度测试）的功能，启动它，OpenGL就可以跟踪在z轴上的像素。这样它只会在那个像素前方没有东西时，才会绘画这个像素。</p>
+<p>到OpenGLView.h中，添加成员变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLuint _depthRenderBuffer;</span><br></pre></td></tr></table></figure>
+<p>在OpenGLView.m:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// Add new method right after setupRenderBuffer</span><br><span class="line">- (void)setupDepthBuffer &#123;</span><br><span class="line">    glGenRenderbuffers(1, &amp;_depthRenderBuffer);</span><br><span class="line">    glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);</span><br><span class="line">    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, self.frame.size.width, self.frame.size.height);    </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Add to end of setupFrameBuffer</span><br><span class="line">glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);</span><br><span class="line"> </span><br><span class="line">// In the render method, replace the call to glClear with the following</span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">glEnable(GL_DEPTH_TEST);</span><br><span class="line"> </span><br><span class="line">// Add to initWithFrame, right before call to setupRenderBuffer</span><br><span class="line">[self setupDepthBuffer];</span><br></pre></td></tr></table></figure>
+<p>setupDepthBuffer方法创建了一个depth buffer。这个与前面的render/color buffer类似，不再重复了。值得注意的是，这里使用了glRenderbufferStorage, 然不是context的renderBufferStorage（这个是在OpenGL的view中特别为color render buffer而设的）。</p>
+<p>接着，我们调用glFramebufferRenderbuffer，来关联depth buffer和render buffer。还记得，我说过frame buffer中储存着很多种不同的buffer？这正是一个新的buffer。</p>
+<p>在render方法中，我们在每次update时都清除深度buffer，并启用depth  testing。</p>
+<p>编译运行，看看这个教程最后的效果。</p>
+<p>一个选择的立方块，用到了OpenGL ES2.0。</p>
+<p><img src="https://github.com/sqjuanke/learnopengl/blob/master/resource/images/2011080816303365.jpg?raw=true" alt=""></p>
 <p>【引用】</p>
 <ul>
 <li><a href="https://www.cnblogs.com/zilongshanren/archive/2011/08/08/2131019.html" target="_blank" rel="noopener">https://www.cnblogs.com/zilongshanren/archive/2011/08/08/2131019.html</a></li>
@@ -408,12 +466,20 @@
 		  
 			<a href="/tags/OpenGL-ES/">OpenGL ES</a>
 		  
+			<a href="/tags/印象笔记/">印象笔记</a>
+		  
 		</div>
 		
 
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2018/10/29/tutorial-for-ios-getting-started-with-opengl-es-02/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">OpenGL ES2.0 – iphone开发指引 下</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
     
     
       <a class="next" href="/2018/03/28/flutter/">
