@@ -147,13 +147,18 @@
     <link href="http://yoursite.com/2017/12/30/2017/"/>
     <id>http://yoursite.com/2017/12/30/2017/</id>
     <published>2017-12-30T06:00:56.000Z</published>
-    <updated>2020-10-27T05:55:07.287Z</updated>
+    <updated>2020-10-28T07:52:08.105Z</updated>
     
-    <content type="html"><![CDATA[<p>回顾17，迎接18年</p><a id="more"></a><blockquote><h4 id="工作"><a href="#工作" class="headerlink" title="工作"></a><strong>工作</strong></h4></blockquote><p>17年有点类似高产，从16年底到17年底一共完成三款应用的上架，伴随着的是都习惯性的加班，个人的总结少了很多，很多都是业务代码的构写。主要是也是公司的“战略”比较多。</p><p>今年是独立开发的开始，项目中的所有都是自己拿主意。有了更多的自由度，也有了更多的尝试。</p><p>从湖南到广州，工作环境的变化，个人效率也高了不少。</p><p>因为现在招聘好一点基本上会看看你的GitHub，个人博客。不像前几年会拉点控件都可以找到一份不错的工作。世界在进步，只有在浪潮退去之后，才知道谁是裸泳，谁在摸鱼。最近开通了个人博客，也准备把躺在印象笔记里面的东西搬出来，以后也陆续更新一些个人的文章，GitHub里面也准备时常更新一些代码，发现之前空白都是比较多。尴尬。。。</p><p><strong>iOS</strong></p><p>目前一个项目是采用swift，Objective-C混编，明年3月份有一个新的项目准备全面采用swift，以后主力采用swift。</p><p><strong>尝试</strong></p><p>小程序也是写了一个Demo就没有下文了，原因也是项目紧，连续几个月的995。。</p><p>机器学习，报了优达学院的入门课程，目前还差P3，P4没有完成。感觉有点打水漂了。</p><p>因为机器学习需要Python，所以陆陆续续学了一段时间，但是由于项目紧又停了一段时间了。</p><blockquote><h4 id="生活"><a href="#生活" class="headerlink" title="生活"></a><strong>生活</strong></h4></blockquote><p>结束了晚上回家没有人开灯的情况，虽然两个人都加班比较多。。</p><p>生活没那么贫乏了</p><p>更加有规律，除了晚睡习惯</p><p>除了辣椒，其他东西也有好吃的</p><p>身边的长辈都老了，到了该享乐的年纪，却没有享乐的条件</p><p>物质条件更加好了，却越来越忙</p><blockquote><h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a><strong>最后</strong></h4></blockquote><p>工作方面，需要更多的总结，时常更新内容，向高级开发进军。</p><p>生活方面，保重身体。</p>]]></content>
+    <content type="html"><![CDATA[<p>回顾17，迎接18年</p><blockquote><h4 id="工作"><a href="#工作" class="headerlink" title="工作"></a><strong>工作</strong></h4></blockquote><p>17年有点类似高产，从16年底到17年底一共完成三款应用的上架，伴随着的是都习惯性的加班，个人的总结少了很多，很多都是业务代码的构写。主要是也是公司的“战略”比较多。</p><p>今年是独立开发的开始，项目中的所有都是自己拿主意。有了更多的自由度，也有了更多的尝试。</p><p>从湖南到广州，工作环境的变化，个人效率也高了不少。</p><a id="more"></a><p><strong>尝试</strong></p><p>小程序也是写了一个Demo就没有下文了，原因也是项目紧，连续几个月的995。。</p><p>机器学习，报了优达学院的入门课程，目前还差P3，P4没有完成。感觉有点打水漂了。</p><p>因为机器学习需要Python，所以陆陆续续学了一段时间，但是由于项目紧又停了一段时间了。</p><blockquote><h4 id="生活"><a href="#生活" class="headerlink" title="生活"></a><strong>生活</strong></h4></blockquote><p>结束了晚上回家没有人开灯的情况，虽然两个人都加班比较多。</p><blockquote><h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a><strong>最后</strong></h4></blockquote><p>工作方面，需要更多的总结</p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;回顾17，迎接18年&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h4 id=&quot;工作&quot;&gt;&lt;a href=&quot;#工作&quot; class=&quot;headerlink&quot; title=&quot;工作&quot;&gt;&lt;/a&gt;&lt;strong&gt;工作&lt;/strong&gt;&lt;/h4&gt;&lt;/blockquote&gt;
+&lt;p&gt;17年有点类似高产，从16年底到17年底一共完成三款应用的上架，伴随着的是都习惯性的加班，个人的总结少了很多，很多都是业务代码的构写。主要是也是公司的“战略”比较多。&lt;/p&gt;
+&lt;p&gt;今年是独立开发的开始，项目中的所有都是自己拿主意。有了更多的自由度，也有了更多的尝试。&lt;/p&gt;
+&lt;p&gt;从湖南到广州，工作环境的变化，个人效率也高了不少。&lt;/p&gt;
     
     </summary>
     
