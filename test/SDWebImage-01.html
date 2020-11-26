@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="SDWebImage_01"/>
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sqjuanke">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/test/SDWebImage-01.html"/>
+
+
+<meta name="description" content="SDWebImage 01枚举值SDWebImageContext   Key Value 说明     SDWebImageContextSetImageOperationKey NSString 作为view类别的 operation key使用，用来存储图像下载的operation，用于支持不同图像加载过程的视图实例。如果为nil，则使用类名作为操作键。   SDWebImageContex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SDWebImage_01">
+<meta property="og:url" content="http://yoursite.com/test/SDWebImage-01.html">
+<meta property="og:site_name" content="sqjuanke">
+<meta property="og:description" content="SDWebImage 01枚举值SDWebImageContext   Key Value 说明     SDWebImageContextSetImageOperationKey NSString 作为view类别的 operation key使用，用来存储图像下载的operation，用于支持不同图像加载过程的视图实例。如果为nil，则使用类名作为操作键。   SDWebImageContex">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-03T01:49:00.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SDWebImage_01">
+<meta name="twitter:description" content="SDWebImage 01枚举值SDWebImageContext   Key Value 说明     SDWebImageContextSetImageOperationKey NSString 作为view类别的 operation key使用，用来存储图像下载的operation，用于支持不同图像加载过程的视图实例。如果为nil，则使用类名作为操作键。   SDWebImageContex">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> SDWebImage_01 - sqjuanke </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">sqjuanke</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        <article class="post">
+            <header class="post-header">
+                <h1 class="post-title">
+                    SDWebImage_01
+                </h1>
+            </header>
+            <div class="post-content">
+                <h1 id="SDWebImage-01"><a href="#SDWebImage-01" class="headerlink" title="SDWebImage 01"></a>SDWebImage 01</h1><h2 id="枚举值"><a href="#枚举值" class="headerlink" title="枚举值"></a>枚举值</h2><h3 id="SDWebImageContext"><a href="#SDWebImageContext" class="headerlink" title="SDWebImageContext"></a>SDWebImageContext</h3><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SDWebImageContextSetImageOperationKey</td>
+<td>NSString</td>
+<td>作为view类别的 operation key使用，用来存储图像下载的operation，用于支持不同图像加载过程的视图实例。如果为nil，则使用类名作为操作键。</td>
+</tr>
+<tr>
+<td>SDWebImageContextCustomManager</td>
+<td>SDWebImageManager</td>
+<td>可以传入一个自定义的SDWebImageManager，默认使用[SDWebImageManager sharedManager]</td>
+</tr>
+<tr>
+<td>SDWebImageContextImageTransformer</td>
+<td>id</td>
+<td>可以传入一个SDImageTransformer类型，用于转换处理加载出来的图片，并将变换后的图像存储到缓存中。如果设置了，则会忽略manager中的transformer</td>
+</tr>
+<tr>
+<td>SDWebImageContextImageScaleFactor</td>
+<td>CGFloat</td>
+<td>CGFloat原始值，为用于指定图像比例且这个数值应大于等于1.0</td>
+</tr>
+<tr>
+<td>SDWebImageContextStoreCacheType</td>
+<td>SDImageCacheType</td>
+<td>SDImageCacheType原始值，用于刚刚下载图像时指定缓存类型，并将其存储到缓存中。 指定SDImageCacheTypeNone：禁用缓存存储; SDImageCacheTypeDisk：仅存储在磁盘缓存中; SDImageCacheTypeMemory：只存储在内存中；SDImageCacheTypeAll：存储在内存缓存和磁盘缓存中。如果没有提供或值无效，则使用SDImageCacheTypeAll</td>
+</tr>
+<tr>
+<td>SDWebImageContextAnimatedImageClass</td>
+<td>Class（UIImage / NSImage的子类并采用了SDAnimatedImage协议 ）</td>
+<td>用于使用SDAnimatedImageView来改善动画图像渲染性能（尤其是大动画图像上的内存使用）</td>
+</tr>
+<tr>
+<td>SDWebImageContextDownloadRequestModifier</td>
+<td>id</td>
+<td>用于在加载图片前修改NSURLRequest</td>
+</tr>
+<tr>
+<td>SDWebImageContextCacheKeyFilter</td>
+<td>id</td>
+<td>指定图片的缓存key</td>
+</tr>
+<tr>
+<td>SDWebImageContextCacheSerializer</td>
+<td>id</td>
+<td>转换需要缓存的图片格式，通常用于需要缓存的图片格式与下载的图片格式不相符的时候，如：下载的时候为了节约流量、减少下载时间使用了WebP格式，但是如果缓存也用WebP，每次从缓存中取图片都需要经过一次解压缩，这样是比较影响性能的，就可以使用id</td>
+</tr>
+<tr>
+<td>SDWebImageContextLoaderCachedImage</td>
+<td>UIImage/NSImage</td>
+<td>SDImageLoader.m</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+        </article>
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2020
+    <span class="footer-author">luo.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
