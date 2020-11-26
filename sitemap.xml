@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/02/10/yanxuan/</loc>
+    
+    <lastmod>2020-11-26T08:19:14.747Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/11/26/im-01/</loc>
     
-    <lastmod>2020-11-26T08:11:55.215Z</lastmod>
+    <lastmod>2020-11-26T08:17:50.878Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>http://yoursite.com/2018/10/29/tutorial-for-ios-getting-started-with-opengl-es-02/</loc>
     
     <lastmod>2020-10-28T07:39:06.512Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/02/10/yanxuan/</loc>
-    
-    <lastmod>2020-10-27T06:01:30.567Z</lastmod>
     
   </url>
   
